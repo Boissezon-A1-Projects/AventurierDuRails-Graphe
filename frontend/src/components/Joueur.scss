@@ -1,0 +1,102 @@
+@import 'constants.scss';
+
+$panneau-width: 280px;
+$card-overlap: 0.8;
+
+.panneau-joueur {
+    color: var(--col-dark);
+    border: 1px solid var(--col-dark);
+    border-radius: 8px;
+    width: $panneau-width;
+    padding: 4px;
+    margin-left: 4px;
+    margin-bottom: 4px;
+    box-shadow: 2px 2px 2px var(--col-dark);
+
+    &.BLEU {
+        background: var(--col-light-BLEU);
+    }
+
+    &.VERT {
+        background: var(--col-light-VERT);
+    }
+
+    &.ROSE {
+        background: var(--col-light-ROSE);
+    }
+
+    &.ROUGE {
+        background: var(--col-light-ROUGE);
+    }
+
+    &.JAUNE {
+        background: var(--col-light-JAUNE);
+    }
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 4px;
+    }
+
+    .info {
+        width: 100%;
+    }
+
+    .nom {
+        width: 100%;
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    .avatar {
+        height: 84px;
+        width: 66px;
+    }
+
+    .secret {
+        display: none;
+    }
+
+    &:hover .secret,
+    &.actif .secret {
+        display: block;
+    }
+
+    .destinations {
+        cursor: pointer;
+        align-content: right;
+        font-size: 80%;
+
+        .destination {
+            &:hover {
+                background-color: #ffffff44;
+            }
+
+            &.complete {
+                text-decoration: line-through;
+            }
+        }
+    }
+
+    .cartes-transport {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        width: calc($panneau-width - $card-overlap * var(--card-width));
+    }
+
+    .carte-transport {
+        transform-origin: top left;
+        position: relative;
+        padding: 0;
+        margin-right: calc(-1 * $card-overlap * var(--card-width));
+        // border: 1px solid var(--col-dark);
+        // border-radius: 4px;
+        // overflow: hidden;
+        // width: $card-width;
+        // height: $card-width * $card-ratio;
+    }
+}

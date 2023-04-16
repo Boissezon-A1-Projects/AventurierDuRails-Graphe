@@ -1,0 +1,47 @@
+@import 'constants';
+
+#piles {
+    justify-content: space-around;
+    margin-top: 10px;
+    flex-grow: 1;
+
+    #cartes-visibles {
+        justify-content: space-evenly;
+    }
+
+    #pioches {
+        margin-top: 10px;
+        justify-content: space-between;
+    }
+
+    .pile-pioche {
+        font-size: 1em;
+        text-align: center;
+        margin-right: 5px;
+        align-items: start;
+    }
+
+    .defausse {
+        font-size: 1em;
+        text-align: center;
+
+
+        .defausse-cartes {
+            height: var(--card-height);
+            flex-direction: column-reverse;
+        }
+
+        .carte-transport {
+            margin-bottom: calc(-.75 * var(--card-height));
+        }
+    }
+
+    #defausse-cartes-wagon:hover img {
+        display: block;
+    }
+
+    #defausse-cartes-wagon img:last-child {
+        margin-top: 0;
+        display: block;
+    }
+}

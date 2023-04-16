@@ -1,0 +1,75 @@
+#log {
+    margin: 5px 0;
+    padding: 10px 30px 12px 26px;
+    width: 408px;
+    height: 263px;
+    font-size: 8pt;
+    background: url(/images/dialogue-box_Big.png);
+    background-size: cover;
+
+    #inner-log {
+        padding: 0px;
+        height: 100%;
+        overflow: auto;
+    }
+
+    ::-webkit-scrollbar {
+        background-color: transparent;
+    }
+
+    .tour {
+        margin-left: 100px;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+    
+    .joueur {
+        font-weight: bold;
+    }
+    
+    .ville,
+    .route {
+        font-style: italic;
+        font-weight: bold;
+    }
+    
+    img.couleur {
+        width: 14px;
+        height: 14px;
+        vertical-align: middle;
+    }
+    .nom-carte, .route {
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        font-weight: bold;
+    }
+    
+    .rouge {
+        text-decoration-color: #be3c33;
+    }
+    
+    .vert {
+        text-decoration-color: #96c156;
+    }
+    
+    .jaune {
+        text-decoration-color: #fbe969;
+    }
+    
+    .noir {
+        text-decoration-color: #3a4f59;
+    }
+    
+    .blanc {
+        text-decoration-color: #e8e9ec;
+    }
+    
+    .violet {
+        text-decoration-color: #b991bb;
+    }
+    
+    .gris {
+        text-decoration-color: #969b9d;
+    }
+    
+}

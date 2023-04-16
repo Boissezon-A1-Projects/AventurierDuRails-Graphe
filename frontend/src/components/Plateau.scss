@@ -1,0 +1,42 @@
+#plateau {
+  background: url(/images/map.jpg);
+  background-size: contain;
+  width: 960px;
+  height: 535px;
+  border: 1px var(--col-dark) solid;
+  border-radius: 8px;
+  box-shadow: 2px 2px 2px var(--col-dark);
+  cursor: pointer;
+
+  #cache {
+    fill: #fff;
+    display: none;
+    fill-opacity: 0.7;
+  }
+
+  .ville,
+  .route {
+    fill-opacity: 0;
+  }
+
+  .no-pointer {
+    pointer-events: none;
+  }
+
+  @keyframes dash {
+    from {
+      stroke-dashoffset: 20;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .segment.highlighted {
+    stroke-width: 6px;
+    stroke: black;
+    stroke-dasharray: 10, 10;
+    animation: dash 1s linear infinite;
+  }
+}

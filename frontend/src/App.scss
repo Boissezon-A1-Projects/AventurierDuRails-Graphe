@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    --col-BLEU: #205099;
+    --col-light-BLEU: #87BDE1;
+    --col-ROUGE: #D64036;
+    --col-light-ROUGE: #CC916C;
+    --col-VERT: #65964C;
+    --col-light-VERT: #C6E370;
+    --col-JAUNE: #C69943;
+    --col-light-JAUNE: #F6E678;
+    --col-ROSE: #5E3182;
+    --col-light-ROSE: #D89FDB;
+    --col-dark: #373F3B;
+    
+    --card-width: 128px;
+    --card-height: 80px;
+}
+
+html,
+body {
+    position: relative;
+}
+
+body {
+    color: var(--col-dark);
+    margin: 0;
+    padding: 8px;
+    box-sizing: border-box;
+    font-family: "IM Fell English SC", serif;
+    background: #E1E5E7;
+}
+
+#left-side {
+    width: 960px;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
