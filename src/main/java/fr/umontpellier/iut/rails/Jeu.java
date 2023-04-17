@@ -220,6 +220,10 @@ public class Jeu implements Runnable {
             passeAuJoueurSuivant();
         }
         // Fin de la partie
+        log("Fin de la partie.");
+        for (Joueur j : joueurs) {
+            log(String.format("%s : %d points", j.toLog(), j.calculerScoreFinal()));
+        }
         prompt("Fin de la partie.", new ArrayList<>(), true);
     }
 
