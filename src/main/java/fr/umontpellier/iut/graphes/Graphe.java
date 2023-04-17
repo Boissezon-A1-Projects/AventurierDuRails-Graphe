@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * (Multi) Graphe non-orienté pondéré. Le poids de chaque arête correspond à la longueur de la route correspondante.
  * Pour une paire de sommets fixée {i,j}, il est possible d'avoir plusieurs arêtes
- * d'extrémités i et j et de longueur identique, du moment que leurs données sont différentes.
+ * d'extrémités i et j et de longueur identique, du moment que leurs routes sont différentes.
  * Par exemple, il est possible d'avoir les deux arêtes suivantes dans le graphe :
  * Arete a1 = new Arete(i,j,new RouteTerrestre(villes.get("Lima"), villes.get("Valparaiso"), Couleur.GRIS, 2))
  * et
@@ -27,17 +27,14 @@ public class Graphe {
      * Construit un graphe à n sommets 0..n-1 sans arêtes
      */
     public Graphe(int n) {
-        mapAretes = new HashMap<>();
-        for (int i = 0; i < n; i++) {
-            ajouterSommet(i);
-        }
+        throw new RuntimeException("Méthode non implémentée");
     }
 
     /**
      * Construit un graphe vide
      */
     public Graphe() {
-        this(0);
+        throw new RuntimeException("Méthode non implémentée");
     }
 
     /**
@@ -76,7 +73,8 @@ public class Graphe {
     }
 
     /**
-     * @return le nombre d'arêtes du graphe
+     * @return le nombre d'arêtes du graphe (ne pas oublier que this est un multigraphe : si plusieurs arêtes sont présentes entre un même coupe de sommets {i,j}, il faut
+     * toutes les compter)
      */
     public int nbAretes() {
         throw new RuntimeException("Méthode non implémentée");
@@ -99,7 +97,7 @@ public class Graphe {
     /**
      * Ajoute une arête au graphe si elle n'est pas déjà présente
      *
-     * @param a arête à ajouter. Si les 2 sommets {i,j} de a ne sont pas dans l'ensemble,
+     * @param a l'arête à ajouter. Si les 2 sommets {i,j} de a ne sont pas dans l'ensemble,
      *          alors les sommets sont automatiquement ajoutés à l'ensemble de sommets du graphe
      */
     public void ajouterArete(Arete a) {
@@ -107,10 +105,10 @@ public class Graphe {
     }
 
     /**
-     * Supprime une arête du graphe si elle est présente
+     * Supprime une arête du graphe si elle est présente, sinon ne fait rien
      *
      * @param a arête à supprimer
-     *          prérequis this contient les 2 sommets {id,j} de {@param a}
+     *
      */
     public void supprimerArete(Arete a) {
         throw new RuntimeException("Méthode non implémentée");
@@ -156,17 +154,47 @@ public class Graphe {
         throw new RuntimeException("Méthode non implémentée");
     }
 
+    /**
+     *
+     * @return le degré max, et Integer.Min_VALUE si le graphe est vide
+     */
+    public int degreMax(){
+        throw new RuntimeException("Méthode non implémentée");
+    }
+
+    public boolean estSimple(){
+        throw new RuntimeException("Méthode non implémentée");
+    }
+
+    /**
+     * @return ture ssi pour tous sommets i,j de this avec (i!=j), alors this contient une arête {i,j}
+     *
+     */
     public boolean estComplet() {
         throw new RuntimeException("Méthode non implémentée");
     }
 
+    /**
+     * @return true ssi this est une chaîne. Attention, être une chaîne
+     * implique en particulier que l'on a une seule arête (et pas plusieurs en parallèle) entre
+     * les sommets successifs de la chaîne. On considère que le graphe vide est une chaîne.
+     */
     public boolean estUneChaine() {
         throw new RuntimeException("Méthode non implémentée");
     }
 
+
+    /**
+     * @return true ssi this est un cycle. Attention, être un cycle implique
+     * en particulier que l'on a une seule arête (et pas plusieurs en parallèle) entre
+     * les sommets successifs du cycle.
+     * On considère que dans le cas où G n'a que 2 sommets {i,j}, et 2 arêtes parallèles {i,j}, alors G n'est PAS un cycle.
+     * On considère que le graphe vide est un cycle.
+     */
     public boolean estUnCycle() {
-        throw new RuntimeException("Méthode non implémentée");
+           throw new RuntimeException("Méthode non implémentée");
     }
+
 
     public boolean estUneForet() {
         throw new RuntimeException("Méthode non implémentée");
@@ -192,7 +220,7 @@ public class Graphe {
     }
 
     /**
-     * @return true si et seulement si la séquence d'entiers passée en paramètre correspond à un graphe valide.
+     * @return true si et seulement si la séquence d'entiers passée en paramètre correspond à un graphe simple valide.
      * La pondération des arêtes devrait être ignorée.
      */
     public static boolean sequenceEstGraphe(List<Integer> sequence) {
