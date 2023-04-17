@@ -72,12 +72,13 @@ Voici une liste des méthodes de la classe `Graphe` que nous vous demandons de p
 19. Déterminer s'il existe un parcours sans répétition de sommets passant par une liste donnée de villes (utile pour les cartes _Destination Itinéraire_).
 
 **Questions bonus :**
-20.  Étant donné un joueur et deux villes (correspondant à deux sommets dans le graphe), déterminer le plus petit ensemble _bloquant_ de routes. Un ensemble est bloquant si le joueur ne peut pas relier les deux villes sans utiliser une de ces routes. 
-21. **grand bonus (compliquée à réaliser) :** En fonction des cartes transport dans la main du joueur, déterminer un ensemble de routes que le joueur peut capturer :
-    * Pour compléter une destination (si vous pouvez minimiser la longueur totale des routes à capturer, c'est super !) ;
-    * ou pour maximiser la somme des points donnés par les routes capturées.
-    
-    Dans les questions ci-dessus, si vous pouvez tenir compte des pions wagon et bateau du joueur, c'est encore mieux !
+
+20. Étant donné un joueur et deux villes (correspondant à deux sommets dans le graphe), déterminer le plus petit ensemble _bloquant_ de routes. Un ensemble est bloquant si le joueur ne peut pas relier les deux villes sans utiliser une de ces routes.
+21. **Grand bonus (compliquée à réaliser) :** En fonction des cartes transport dans la main du joueur, déterminer un ensemble de routes que le joueur peut capturer :
+* Pour compléter une destination (si vous pouvez minimiser la longueur totale des routes à capturer, c'est super !) ;
+* ou pour maximiser la somme des points donnés par les routes capturées.
+
+Dans les questions bonus ci-dessus, si vous pouvez tenir compte des pions wagon et bateau du joueur, c'est encore mieux !
 
 **D'autres fonctions vous seront demandées ultérieurement dans le cadre du projet. Pensez à consulter régulièrement le [FAQ](https://gitlabinfo.iutmontp.univ-montp2.fr/graphes/aventuriers-du-graphe-autour-monde/-/blob/master/FAQ.md). Vous serez informés s'il y a des nouveautés (surveillez le [Forum Piazza](https://piazza.com/class/ld2tzi5k82via)).**
 
@@ -121,7 +122,7 @@ Pour rendre le projet plus ludique, une fonctionnalité supplémentaire a été 
 
 ![](ressources/Chemin_le_plus_court_destination.png)
 
-Dans la capture d'écran ci-dessus, le joueur courant est _Largo_ et la destination survolée est _Marseille-Beijing_ (surligné en blanc dans l'image). Le chemin le plus court correspondant est balisé avec un contour noir sur le plateau du jeu et il passe par _Athina_, _Tehran_ et _Lahore_. **Mais attention**, pour que ça marche, il faudrait que vous implémentiez correctement les fonctions `routesPourCompleterDestination(Destination d)` et `routesPourCompleterDestinationAvecPions(Destination d)` de la classe `Joueur`.
+Dans la capture d'écran ci-dessus, le joueur courant est _Largo_ et la destination survolée est _Marseille-Beijing_ (surligné en blanc dans l'image). Le chemin le plus court correspondant est balisé avec un contour noir sur le plateau du jeu et il passe par _Athina_, _Tehran_ et _Lahore_. **Mais attention**, pour que ça marche, il faudrait que vous implémentiez la méthode `routesEnSurbrillancePourDestination(Destination d)` de la classe `Joueur` qui retourne une collection de routes. Cette collection indiquera quelles routes sont à surligner quand le curseur de la souris passe sur le nom d'une destination. Par exemple, une fois que vous réaliserez les fonctions `routesPourCompleterDestination(Destination d)` et `routesPourCompleterDestinationAvecPions(Destination d)` de la classe `Joueur`, vous pouvez les appeler dans `routesEnSurbrillancePourDestination(Destination d)` afin de les afficher en surbrillance.
 
 Les autres méthodes à implémenter, comme d'habitude, sont celles qui lèvent des exceptions de type `RuntimeException` avec le message `"Méthode non implémentée !"`. La plupart, se trouvent dans la classe `Graphe` du paquetage `fr.umontpellier.iut.graphes`.
 
