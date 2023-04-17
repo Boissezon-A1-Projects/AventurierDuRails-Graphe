@@ -64,11 +64,18 @@ Voici une liste des méthodes de la classe `Graphe` que nous vous demandons de p
 12. Déterminer si deux sommets sont voisins.
 13. Déterminer si une arête est un isthme.
 14. Déterminer si le graphe est un arbre/forêt.
-15. Programmer l'algorithme de Dijkstra qui renvoie la distance minimale entre deux sommets donnés ainsi qu'un parcours réalisant cette distance (sous la forme d'une liste d'entiers, où le premier entier est le sommet de départ et le dernier le sommet d'arrivée).
-16. Déterminer un plus court ensemble de routes (en nombre total de pions utilisés) que le joueur peut capturer pour compléter une
+15. Fusionner deux sommets (en supprimant les arêtes entre eux).
+16. Programmer l'algorithme de Dijkstra qui renvoie la distance minimale entre deux sommets donnés ainsi qu'un parcours réalisant cette distance (sous la forme d'une liste d'entiers, où le premier entier est le sommet de départ et le dernier le sommet d'arrivée).
+17. Déterminer un plus court ensemble de routes (en nombre total de pions utilisés) que le joueur peut capturer pour compléter une
     destination (méthode `routesPourCompleterDestination(Destination d)` de la classe `Joueur`). Cette méthode ne tient pas compte de la quantité des pions dont le joueur dispose.
-17. Déterminer un plus court ensemble de routes (en nombre total de pions utilisés) que le joueur peut capturer pour compléter une destination en utilisant les pions dont le joueur dispose (méthode `routesPourCompleterDestinationAvecPions(Destination d)` de la classe `Joueur`).
-18. Déterminer s'il existe un parcours sans répétition de sommets passant par une liste donnée de villes (utile pour les cartes _Destination Itinéraire_).
+18. Déterminer un plus court ensemble de routes (en nombre total de pions utilisés) que le joueur peut capturer pour compléter une destination en utilisant les pions dont le joueur dispose (méthode `routesPourCompleterDestinationAvecPions(Destination d)` de la classe `Joueur`).
+19. Déterminer s'il existe un parcours sans répétition de sommets passant par une liste donnée de villes (utile pour les cartes _Destination Itinéraire_).
+20. **Question bonus :** Étant donné un joueur et deux villes (correspondant à deux sommets dans le graphe), déterminer le plus petit ensemble _bloquant_ de routes. Un ensemble est bloquant si le joueur ne peut pas relier les deux villes sans utiliser une de ces routes. 
+21. **Question grand bonus (compliquée à réaliser) :** En fonction des cartes transport dans la main du joueur, déterminer un ensemble de routes que le joueur peut capturer :
+    * Pour compléter une destination (si vous pouvez minimiser la longueur totale des routes à capturer, c'est super !) ;
+    * ou pour maximiser la somme des points donnés par les routes capturées.
+    
+    Dans les questions ci-dessus, si vous pouvez tenir compte des pions wagon et bateau du joueur, c'est encore mieux !
 
 **D'autres fonctions vous seront demandées ultérieurement dans le cadre du projet. Pensez à consulter régulièrement le [FAQ](https://gitlabinfo.iutmontp.univ-montp2.fr/graphes/aventuriers-du-graphe-autour-monde/-/blob/master/FAQ.md). Vous serez informés s'il y a des nouveautés (surveillez le [Forum Piazza](https://piazza.com/class/ld2tzi5k82via)).**
 

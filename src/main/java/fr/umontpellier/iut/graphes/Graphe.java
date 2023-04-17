@@ -220,6 +220,17 @@ public class Graphe {
     }
 
     /**
+     * Fusionne les deux sommets passés en paramètre.
+     * Toutes les arêtes reliant i à j doivent être supprimées (pas de création de boucle).
+     * L'entier correspondant au sommet nouvellement créé sera le min{i,j}. Le voisinage du nouveau sommet
+     * est l'union des voisinages des deux sommets fusionnés.
+     * Si un des sommets n'est pas présent dans le graphe, alors cette fonction ne fait rien.
+     */
+    public void fusionnerSommets(int i, int j) {
+        throw new RuntimeException("Méthode non implémentée");
+    }
+
+    /**
      * @return true si et seulement si la séquence d'entiers passée en paramètre correspond à un graphe simple valide.
      * La pondération des arêtes devrait être ignorée.
      */
