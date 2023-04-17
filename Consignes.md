@@ -23,7 +23,7 @@ Les étapes à suivre par chaque équipe pour organiser correctement votre proje
         * Ne faites pas de `git add/commit` tant que des tests non annotés `@Disabled` ne passent pas.
         * **Remarque** : soyez vigilants même si votre programme passe tous les tests, car en règle générale un programme n'est **jamais** suffisamment testé...
 
-* Certaines précisions ou consignes pourront être ajoutées ultérieurement dans [FAQ](https://gitlabinfo.iutmontp.univ-montp2.fr/graphes/aventuriers-du-graphe-autour-du-monde/-/blob/master/FAQ.md) et vous en serez informés.
+* Certaines précisions ou consignes pourront être ajoutées ultérieurement dans [FAQ](https://gitlabinfo.iutmontp.univ-montp2.fr/graphes/aventuriers-du-graphe/-/blob/master/FAQ.md) et vous en serez informés.
 * Surveillez l'activité sur le forum Piazza, les nouvelles informations y seront mentionnées. N'hésitez pas à y poser des questions. Ça vous permettra d'obtenir une réponse de la part des enseignants ou étudiants rapidement, mais aussi d'aider les autres équipes, potentiellement intéressées par la réponse.
 
 ### Conseils concernant la gestion de version
