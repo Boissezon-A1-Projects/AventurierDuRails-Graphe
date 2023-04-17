@@ -70,8 +70,10 @@ Voici une liste des méthodes de la classe `Graphe` que nous vous demandons de p
     destination (méthode `routesPourCompleterDestination(Destination d)` de la classe `Joueur`). Cette méthode ne tient pas compte de la quantité des pions dont le joueur dispose.
 18. Déterminer un plus court ensemble de routes (en nombre total de pions utilisés) que le joueur peut capturer pour compléter une destination en utilisant les pions dont le joueur dispose (méthode `routesPourCompleterDestinationAvecPions(Destination d)` de la classe `Joueur`).
 19. Déterminer s'il existe un parcours sans répétition de sommets passant par une liste donnée de villes (utile pour les cartes _Destination Itinéraire_).
-20. **Question bonus :** Étant donné un joueur et deux villes (correspondant à deux sommets dans le graphe), déterminer le plus petit ensemble _bloquant_ de routes. Un ensemble est bloquant si le joueur ne peut pas relier les deux villes sans utiliser une de ces routes. 
-21. **Question grand bonus (compliquée à réaliser) :** En fonction des cartes transport dans la main du joueur, déterminer un ensemble de routes que le joueur peut capturer :
+
+**Questions bonus :**
+20.  Étant donné un joueur et deux villes (correspondant à deux sommets dans le graphe), déterminer le plus petit ensemble _bloquant_ de routes. Un ensemble est bloquant si le joueur ne peut pas relier les deux villes sans utiliser une de ces routes. 
+21. **grand bonus (compliquée à réaliser) :** En fonction des cartes transport dans la main du joueur, déterminer un ensemble de routes que le joueur peut capturer :
     * Pour compléter une destination (si vous pouvez minimiser la longueur totale des routes à capturer, c'est super !) ;
     * ou pour maximiser la somme des points donnés par les routes capturées.
     
