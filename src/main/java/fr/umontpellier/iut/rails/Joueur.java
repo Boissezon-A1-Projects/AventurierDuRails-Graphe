@@ -753,7 +753,7 @@ public class Joueur {
                 .toList();
         List<List<String>> routesPourDestinationsIncompletes = new ArrayList<>();
         for (Destination d : destinationsIncompletes) {
-            Collection<Route> routes = routesPourCompleterDestinationAvecPions(d);
+            Collection<Route> routes = routesEnSurbrillancePourDestination(d);
             if (routes == null) {
                 routesPourDestinationsIncompletes.add(new ArrayList<>());
             } else {
@@ -788,7 +788,7 @@ public class Joueur {
      */
     public Collection<Route> routesPourCompleterDestination(Destination d) {
         // Cette fonction est à réécrire entièrement
-        return null;
+        throw new RuntimeException("Méthode non implémentée");
     }
 
     /**
@@ -802,6 +802,17 @@ public class Joueur {
      */
     public Collection<Route> routesPourCompleterDestinationAvecPions(Destination d) {
         // Cette fonction est à réécrire entièrement
-        return routesPourCompleterDestination(d);
+        throw new RuntimeException("Méthode non implémentée");
+    }
+
+    /**
+     * Renvoie une collection de routes que l'on souhaite mettre en surbrillance
+     * dans l'interface graphique lorsque le curseur passe sur le nom d'une
+     * destination.
+     * 
+     * @return
+     */
+    public Collection<Route> routesEnSurbrillancePourDestination(Destination d) {
+        return null;
     }
 }
