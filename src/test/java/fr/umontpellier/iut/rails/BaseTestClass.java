@@ -1,15 +1,18 @@
 package fr.umontpellier.iut.rails;
 
-import fr.umontpellier.iut.rails.data.CarteTransport;
-import fr.umontpellier.iut.rails.data.Destination;
-import fr.umontpellier.iut.rails.data.Ville;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Timeout;
 
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.List;
+import fr.umontpellier.iut.rails.data.CarteTransport;
+import fr.umontpellier.iut.rails.data.Destination;
+import fr.umontpellier.iut.rails.data.TypeCarteTransport;
+import fr.umontpellier.iut.rails.data.Ville;
 
 @Timeout(value = 1, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 public class BaseTestClass {
@@ -87,6 +90,15 @@ public class BaseTestClass {
             TestUtils.setAttribute(j, "nbPionsWagonEnReserve", 5);
             TestUtils.setAttribute(j, "nbPionsBateau", 40);
             TestUtils.setAttribute(j, "nbPionsBateauEnReserve", 10);
+            List<CarteTransport> cartesTransport = (List<CarteTransport>) TestUtils.getAttribute(j, "cartesTransport");
+            for (CarteTransport c: cartesTransport) {
+                if (c.getType() == TypeCarteTransport.BATEAU) {
+                    piocheBateau.add(c);
+                } else {
+                    piocheWagon.add(c);
+                }
+            }
+            cartesTransport.clear();
         }
 
         // initialisation des cartes visibles
