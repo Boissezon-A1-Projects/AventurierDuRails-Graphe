@@ -14,9 +14,12 @@ public class AppGraphes {
             Arete a = new Arete(i, (i + 1) % 3);
             listeDAretes.add(a); // stockage de toutes les arêtes
         }
+        listeDAretes.add(new Arete(0, 3));
 
         Graphe g1 = new Graphe(listeDAretes);
         System.out.println(g1.toString());
+
+        System.out.println(g1.sequenceSommets());
 
         /*
         // Le scénario suivant illustre l'utilisation de la classe Graphe. Le code ne fonctionne pas pour le moment, car

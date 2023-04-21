@@ -149,7 +149,12 @@ public class Graphe {
      * @return true si a est présente dans le graphe
      */
     public boolean existeArete(Arete a) {
-        throw new RuntimeException("Méthode non implémentée");
+        int s1 = a.i();
+        int s2 = a.j();
+        if(mapAretes.containsKey(s1) && mapAretes.containsKey(s2)){
+            return mapAretes.get(s1).contains(a);
+        }
+        return false;
     }
 
     @Override
@@ -185,7 +190,10 @@ public class Graphe {
      * @param v le sommet à supprimer
      */
     public void supprimerSommet(int v) {
-        throw new RuntimeException("Méthode non implémentée");
+        for(Arete a : mapAretes.get(v)){
+            mapAretes.get(a.getAutreSommet(v)).remove(a);
+        }
+        mapAretes.remove(v);
     }
 
     public int degre(int v) {
@@ -223,13 +231,43 @@ public class Graphe {
         throw new RuntimeException("Méthode non implémentée");
     }
 
+    /**Fait par nous*/
+    public List<Integer> sequenceSommets(){
+        List<Integer> list = new ArrayList<>();
+        for(Integer i : mapAretes.keySet()) {
+            list.add(degre(i));
+        }
+        Collections.sort(list);
+        return list;
+    }
+
+
     /**
      * @return true ssi this est une chaîne. Attention, être une chaîne
      * implique en particulier que l'on a une seule arête (et pas plusieurs en parallèle) entre
      * les sommets successifs de la chaîne. On considère que le graphe vide est une chaîne.
      */
     public boolean estUneChaine() {
-        throw new RuntimeException("Méthode non implémentée");
+        int nbSommetsDeg1 = 0;
+        List<Integer> list = sequenceSommets();
+
+        if(list.get(3) != 2){
+            return false;
+        }
+
+        for(Integer i : list){
+            if(list.get(i) == 1){
+                nbSommetsDeg1++;
+                if(nbSommetsDeg1 == 3){
+                    return false;
+                }
+            }
+
+            else if(!(list.get(i) == 2)){
+                return false;
+            }
+        }
+        return true;
     }
 
 
