@@ -7,6 +7,18 @@ import java.util.Set;
 
 public class AppGraphes {
     public static void main(String[] args) {
+
+        List<Arete> listeDAretes = new ArrayList<>();
+        // génération d'un graphe où les arêtes sont étiquetés par des entiers aléatoires
+        for (int i = 0; i <= 2; i++) {
+            Arete a = new Arete(i, (i + 1) % 3);
+            listeDAretes.add(a); // stockage de toutes les arêtes
+        }
+
+        Graphe g1 = new Graphe(listeDAretes);
+        System.out.println(g1.toString());
+
+        /*
         // Le scénario suivant illustre l'utilisation de la classe Graphe. Le code ne fonctionne pas pour le moment, car
         // les classes Graphes et Arete ne sont pas encore complète.
         Graphe g1 = new Graphe(3);
@@ -39,6 +51,6 @@ public class AppGraphes {
         System.out.println("g3\n" + g3);
         g3.supprimerSommet(1);
         System.out.println("g3\n" + g3);
-
+    */
     }
 }

@@ -51,10 +51,10 @@ public class Graphe {
             int s1 = arete.i();
             int s2 = arete.j();
             if(!mapAretes.containsKey(s1)){
-                mapAretes.put(s1, null);
+                mapAretes.put(s1, new HashSet<>());
             }
             if(!mapAretes.containsKey(s2)){
-                mapAretes.put(s2, null);
+                mapAretes.put(s2, new HashSet<>());
             }
             mapAretes.get(s1).add(arete);
             mapAretes.get(s2).add(arete);
@@ -84,7 +84,7 @@ public class Graphe {
      * @return l'ordre du graphe (le nombre de sommets)
      */
     public int nbSommets() {
-        throw new RuntimeException("Méthode non implémentée");
+        return ensembleSommets().size();
     }
 
     /**
@@ -97,7 +97,7 @@ public class Graphe {
 
 
     public boolean contientSommet(Integer v) {
-        throw new RuntimeException("Méthode non implémentée");
+        return mapAretes.containsKey(v);
     }
 
     /**
@@ -118,7 +118,17 @@ public class Graphe {
      *          alors les sommets sont automatiquement ajoutés à l'ensemble de sommets du graphe
      */
     public void ajouterArete(Arete a) {
-        throw new RuntimeException("Méthode non implémentée");
+        int s1 = a.i();
+        int s2 = a.j();
+
+        if(!mapAretes.containsKey(s1)){
+            mapAretes.put(s1, new HashSet<>());
+        }
+        if(!mapAretes.containsKey(s2)){
+            mapAretes.put(s2, new HashSet<>());
+        }
+        mapAretes.get(s1).add(a);
+        mapAretes.get(s2).add(a);
     }
 
     /**
