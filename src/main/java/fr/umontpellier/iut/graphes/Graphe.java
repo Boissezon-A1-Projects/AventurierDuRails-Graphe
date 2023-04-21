@@ -92,7 +92,11 @@ public class Graphe {
      * toutes les compter)
      */
     public int nbAretes() {
-        return mapAretes.values().size()/2;
+        int somme=0;
+        for (HashSet<Arete> a: mapAretes.values()) {
+            somme += a.size();
+        }
+        return somme/2;
     }
 
 
@@ -138,7 +142,7 @@ public class Graphe {
      *
      */
     public void supprimerArete(Arete a) {
-        if(mapAretes.containsValue(a)){
+        if(mapAretes.get(a.i()).contains(a)){
             mapAretes.get(a.i()).remove(a);
             mapAretes.get(a.j()).remove(a);
         }
@@ -220,7 +224,17 @@ public class Graphe {
     }
 
     public boolean estSimple(){
-        throw new RuntimeException("Méthode non implémentée");
+        /*for (HashSet<Arete> listA: mapAretes.values()) {
+            for (Arete a1: listA) {
+                for (Arete a2: listA) {
+                    if(!a1.equals(a2)){
+                        if(!a1.estLaMeme(a2)){
+                            return false;
+                        }
+                    }
+                }
+            }
+        }*/ return true;
     }
 
     /**
@@ -228,7 +242,13 @@ public class Graphe {
      *
      */
     public boolean estComplet() {
-        throw new RuntimeException("Méthode non implémentée");
+        int ordre = nbSommets();
+        for (Integer degS : sequenceSommets()) {
+            if(degS!=ordre-1){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**Fait par nous*/

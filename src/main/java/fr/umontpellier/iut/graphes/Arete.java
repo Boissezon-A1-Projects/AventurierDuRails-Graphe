@@ -16,6 +16,8 @@ public record Arete(int i, int j, Route route) {
         return i == v || j == v;
     }
 
+    public boolean estLaMeme(Arete a){return  i== a.i() && j==a.j();}
+
     public int getAutreSommet(int v) {
         return v == i ? j : i;
     }
