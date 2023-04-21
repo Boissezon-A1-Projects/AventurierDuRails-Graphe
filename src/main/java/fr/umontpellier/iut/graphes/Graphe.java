@@ -65,7 +65,7 @@ public class Graphe {
      * @return l'ensemble de sommets du graphe
      */
     public Set<Integer> ensembleSommets() {
-        throw new RuntimeException("Méthode non implémentée");
+       return mapAretes.keySet();
     }
 
     /**
@@ -80,7 +80,7 @@ public class Graphe {
      * toutes les compter)
      */
     public int nbAretes() {
-        throw new RuntimeException("Méthode non implémentée");
+        return mapAretes.values().size();
     }
 
 
@@ -94,7 +94,9 @@ public class Graphe {
      * @param v le sommet à ajouter
      */
     public void ajouterSommet(Integer v) {
-        throw new RuntimeException("Méthode non implémentée");
+       if(!mapAretes.containsKey(v)){
+           mapAretes.put(v,new HashSet<>());
+       }
     }
 
     /**
@@ -114,7 +116,10 @@ public class Graphe {
      *
      */
     public void supprimerArete(Arete a) {
-        throw new RuntimeException("Méthode non implémentée");
+        if(mapAretes.containsValue(a)){
+            mapAretes.get(a.i()).remove(a);
+            mapAretes.get(a.j()).remove(a);
+        }
     }
 
     /**
