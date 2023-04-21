@@ -27,7 +27,10 @@ public class Graphe {
      * Construit un graphe à n sommets 0..n-1 sans arêtes
      */
     public Graphe(int n) {
-        throw new RuntimeException("Méthode non implémentée");
+        mapAretes= new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            mapAretes.put(i, new HashSet<>());
+        }
     }
 
     /**
