@@ -92,7 +92,7 @@ public class Graphe {
      * toutes les compter)
      */
     public int nbAretes() {
-        return mapAretes.values().size();
+        return mapAretes.values().size()/2;
     }
 
 
@@ -158,7 +158,15 @@ public class Graphe {
      * @param v l'identifiant du sommet dont on veut le voisinage
      */
     public Set<Integer> getVoisins(int v) {
-        throw new RuntimeException("Méthode non implémentée");
+        if(!mapAretes.containsKey(v)){
+            return null;
+        }else{
+            Set<Integer> s = new HashSet<>();
+            for (Arete a: mapAretes.get(v)) {
+                s.add(a.getAutreSommet(v));
+            }
+            return s;
+        }
     }
 
     /**
@@ -171,7 +179,7 @@ public class Graphe {
     }
 
     public int degre(int v) {
-        throw new RuntimeException("Méthode non implémentée");
+        return mapAretes.get(v).size();
     }
 
     /**
@@ -179,7 +187,18 @@ public class Graphe {
      * @return le degré max, et Integer.Min_VALUE si le graphe est vide
      */
     public int degreMax(){
-        throw new RuntimeException("Méthode non implémentée");
+        if(mapAretes.isEmpty()){
+            return  Integer.MIN_VALUE;
+        }else{
+            int max = 0;
+            for (Integer s : mapAretes.keySet()) {
+                int degS = degre(s);
+                if(degS >=max){
+                    max= degS;
+                }
+            }
+            return max;
+        }
     }
 
     public boolean estSimple(){
