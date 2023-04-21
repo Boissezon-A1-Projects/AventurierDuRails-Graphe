@@ -11,6 +11,7 @@ public record Arete(int i, int j, Route route) {
     }
 
 
+
     public boolean incidenteA(int v) {
         return i == v || j == v;
     }

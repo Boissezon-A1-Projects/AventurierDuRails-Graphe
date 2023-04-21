@@ -37,7 +37,7 @@ public class Graphe {
      * Construit un graphe vide
      */
     public Graphe() {
-        throw new RuntimeException("Méthode non implémentée");
+        mapAretes = new HashMap<>();
     }
 
     /**
@@ -46,7 +46,19 @@ public class Graphe {
      * @param aretes la collection d'arêtes
      */
     public Graphe(Collection<Arete> aretes) {
-        throw new RuntimeException("Méthode non implémentée");
+        this();
+        for(Arete arete : aretes){
+            int s1 = arete.i();
+            int s2 = arete.j();
+            if(!mapAretes.containsKey(s1)){
+                mapAretes.put(s1, null);
+            }
+            if(!mapAretes.containsKey(s2)){
+                mapAretes.put(s2, null);
+            }
+            mapAretes.get(s1).add(arete);
+            mapAretes.get(s2).add(arete);
+        }
     }
 
     /**
