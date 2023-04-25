@@ -46,7 +46,7 @@ public class GrapheProfTest {
         List<Integer> parcoursAttendu2 = Arrays.asList(0, 1, 2, 5, 3);
         List<Integer> parcoursAttendu3 = Arrays.asList(0, 4, 2, 5, 3);
 
-        List<Integer> resultat = grapheAbstrait.parcoursSansRepetition(0, 2, false);
+        List<Integer> resultat = grapheAbstrait.parcoursSansRepetition(sousListe);
 
         assertTrue(collectionsDansLeMemeOrdre(resultat, parcoursAttendu1) ||
                 collectionsDansLeMemeOrdre(resultat, parcoursAttendu2) ||
