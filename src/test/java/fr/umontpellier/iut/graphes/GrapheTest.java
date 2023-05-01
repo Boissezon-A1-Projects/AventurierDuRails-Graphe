@@ -106,4 +106,67 @@ public class GrapheTest {
     @Test
     void testGetVoisins() {
     }
+
+    @Test
+    void testdegreMax() {
+        assertEquals(2, graphe.degreMax());
+    }
+
+    @Test
+    void testestPasComplet() {
+        assertFalse(graphe.estComplet());
+    }
+
+    @Test
+    void testEstComplet(){
+        List<Arete> aretes1 = new ArrayList<>();
+        aretes1.add(new Arete(0, 1));
+        aretes1.add(new Arete(0, 2));
+        aretes1.add(new Arete(1, 2));
+
+
+        Graphe graphe1 = new Graphe(aretes1);
+        System.out.println(graphe1.sequenceSommets());
+
+    }
+
+    @Test
+    void testEstSimpleSansMultiples(){
+        List<Arete> aretes1 = new ArrayList<>();
+        aretes1.add(new Arete(0, 1));
+        aretes1.add(new Arete(0, 2));
+        aretes1.add(new Arete(1, 2));
+
+
+        Graphe graphe1 = new Graphe(aretes1);
+        assertFalse(graphe1.estSimple());
+
+    }
+    @Test
+    void testEstSimpleAvecMultiples(){
+        List<Arete> aretes1 = new ArrayList<>();
+        aretes1.add(new Arete(0, 1));
+        aretes1.add(new Arete(0, 2));
+        aretes1.add(new Arete(1, 2));
+        aretes1.add(new Arete(2, 1));
+
+        Graphe graphe1 = new Graphe(aretes1);
+
+        assertTrue(graphe1.estSimple());
+    }
+
+    @Test
+    void testEstChaine(){
+        List<Arete> aretes1 = new ArrayList<>();
+        aretes1.add(new Arete(0, 1));
+        aretes1.add(new Arete(1, 2));
+        aretes1.add(new Arete(3,2 ));
+        Graphe graphe1 = new Graphe(aretes1);
+
+        assertTrue(graphe1.estUneChaine());
+    }
+    @Test
+    void testEstChaine2(){
+        assertFalse(graphe.estUneChaine());
+    }
 }

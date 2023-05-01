@@ -224,17 +224,18 @@ public class Graphe {
     }
 
     public boolean estSimple(){
-        /*for (HashSet<Arete> listA: mapAretes.values()) {
+        for (HashSet<Arete> listA: mapAretes.values()) {
             for (Arete a1: listA) {
                 for (Arete a2: listA) {
                     if(!a1.equals(a2)){
-                        if(!a1.estLaMeme(a2)){
-                            return false;
+                        if(a1.estLaMeme(a2)){
+                            return true;
                         }
                     }
                 }
             }
-        }*/ return true;
+        }
+        return false;
     }
 
     /**
