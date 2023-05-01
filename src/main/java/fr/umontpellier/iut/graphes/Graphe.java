@@ -272,8 +272,31 @@ public class Graphe {
         int nbSommetsDeg1 = 0;
         List<Integer> list = sequenceSommets();
 
-        if(list.get(3) != 2){
-            return false;
+        int premierSommet1 = -1;
+        int deuxiemeSommet1 = -1;
+
+        if(list.size() > 2 ){
+            if(list.get(2) != 2) {
+                return false;
+            }
+            for(Integer i : mapAretes.keySet()){
+                if(degre(i) == 1){
+                    if(premierSommet1 == -1){
+                        premierSommet1 = i;
+                    }
+                    else{
+                        deuxiemeSommet1 = i;
+                    }
+                }
+            }
+            if(getVoisins(premierSommet1).contains(deuxiemeSommet1)){
+                return false;
+            }
+        }
+        else{
+            if(list.get(0) != 1 || list.get(1) != 1){
+                return false;
+            }
         }
 
         for(Integer i : list){

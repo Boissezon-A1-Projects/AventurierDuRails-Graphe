@@ -8,6 +8,8 @@ import java.util.Set;
 public class AppGraphes {
     public static void main(String[] args) {
 
+
+
         List<Arete> listeDAretes = new ArrayList<>();
         // génération d'un graphe où les arêtes sont étiquetés par des entiers aléatoires
         for (int i = 0; i <= 2; i++) {
@@ -20,6 +22,10 @@ public class AppGraphes {
         System.out.println(g1.toString());
 
         System.out.println(g1.sequenceSommets());
+
+
+
+
 
         /*
         // Le scénario suivant illustre l'utilisation de la classe Graphe. Le code ne fonctionne pas pour le moment, car
