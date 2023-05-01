@@ -323,9 +323,49 @@ public class Graphe {
      * On considère que le graphe vide est un cycle.
      */
     public boolean estUnCycle() {
-           throw new RuntimeException("Méthode non implémentée");
+        List<Integer> seq = sequenceSommets();
+        if(this.mapAretes.isEmpty()){
+            return true;
+        } else if (nbSommets()==2) {
+            return false;
+        }else{
+            for (Integer i:seq) {
+                if(i!=2){
+                    return false;
+                }
+            }
+            List<Integer> sommetsParcourus = new ArrayList<>();
+            Map.Entry<Integer, HashSet<Arete>> firstEntry = mapAretes.entrySet().iterator().next();
+            List<Integer> sommetsAParcourir = new ArrayList<>(); sommetsAParcourir.add(firstEntry.getKey());
+            while(!sommetsAParcourir.isEmpty()) {
+                Integer s = sommetsAParcourir.get(0);
+                sommetsParcourus.add(s);
+                Set<Integer> voisinsS = getVoisins(s);
+                Iterator<Integer> it = voisinsS.iterator();
+                while(it.hasNext()) {
+                    Integer sommet = it.next();
+                    if (!sommetsParcourus.contains(sommet) && !sommetsAParcourir.contains(sommet)) {
+                        sommetsAParcourir.add(sommet);
+                    }
+                    it.remove();
+                }
+                sommetsAParcourir.remove(s);
+            }
+
+            if(sommetsParcourus.size()==mapAretes.keySet().size()){
+                return new HashSet<>(sommetsParcourus).containsAll(mapAretes.keySet()) && mapAretes.keySet().containsAll(sommetsParcourus);
+            }
+            else{
+                return false;
+            }
+
+        }
+
+
     }
 
+    /**FAIT PAR NOUS*/
+    public boolean aUnCycle(){throw new RuntimeException("Méthode non implémentée");}
 
     public boolean estUneForet() {
         throw new RuntimeException("Méthode non implémentée");

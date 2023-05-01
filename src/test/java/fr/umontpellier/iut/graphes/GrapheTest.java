@@ -169,4 +169,24 @@ public class GrapheTest {
     void testEstChaine2(){
         assertFalse(graphe.estUneChaine());
     }
+
+    @Test
+    void testEstCycle(){
+        assertFalse(graphe.estUnCycle());
+    }
+
+    @Test
+    void testEstCycle2(){
+        List<Arete> aretes1 = new ArrayList<>();
+        aretes1.add(new Arete(0, 1));
+
+        aretes1.add(new Arete(1,2 ));
+        aretes1.add(new Arete(2,3 ));
+        aretes1.add(new Arete(3,4 ));
+        aretes1.add(new Arete(4, 0));
+        Graphe graphe1 = new Graphe(aretes1);
+
+        assertTrue(graphe1.estUnCycle());
+    }
+
 }
