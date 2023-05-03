@@ -104,7 +104,7 @@ public class Destination {
         destinations.add(new Destination("Jakarta", "Sydney", 7)); // D17
         destinations.add(new Destination("Caracas", "Al-Qahira", 13)); // D18
         destinations.add(new Destination("Hong Kong", "Jakarta", 5)); // D19
-        destinations.add(new Destination("Casablanca", "Vakutsk", 16)); // D20
+        destinations.add(new Destination("Casablanca", "Yakutsk", 16)); // D20
         destinations.add(new Destination("Athina", "Manila", 14)); // D21
         destinations.add(new Destination("Cape Town", "Jakarta", 13)); // D22
         destinations.add(new Destination("Marseille", "Al-Qahira", 5)); // D23
