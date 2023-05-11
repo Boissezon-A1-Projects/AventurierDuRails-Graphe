@@ -450,7 +450,15 @@ public class Graphe {
      * Si un des sommets n'est pas présent dans le graphe, alors cette fonction ne fait rien.
      */
     public void fusionnerSommets(int i, int j) {
-        throw new RuntimeException("Méthode non implémentée");
+        if(mapAretes.containsKey(i) && mapAretes.containsKey(i)){
+            Set<Integer> voisinsI = getVoisins(i);
+            voisinsI.remove(j);
+            Set<Integer> voisinsJ = getVoisins(j);
+            voisinsJ.remove(i);
+
+            /* a finir*/
+
+        }
     }
 
     /**
