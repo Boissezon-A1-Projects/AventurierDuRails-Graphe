@@ -320,4 +320,18 @@ public class GrapheTest {
 
     }
 
+    @Test
+    void sontAdjacents1(){
+        assertTrue(graphe.sontAdjacents(0,3));
+    }
+
+    @Test
+    void sontAdjacents2(){
+        assertFalse(graphe.sontAdjacents(0,2));
+    }
+
+    @Test
+    void sontAdjacents3(){
+        assertFalse(graphe.sontAdjacents(8,3));
+    }
 }

@@ -430,7 +430,12 @@ public class Graphe {
     }
 
     public boolean sontAdjacents(int i, int j) {
-        throw new RuntimeException("Méthode non implémentée");
+        for (Arete a : mapAretes.get(i)) {
+            if(a.i()== j || a.j()==j){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
