@@ -450,16 +450,47 @@ public class Graphe {
      * Si un des sommets n'est pas présent dans le graphe, alors cette fonction ne fait rien.
      */
     public void fusionnerSommets(int i, int j) {
-        if(mapAretes.containsKey(i) && mapAretes.containsKey(i)){
-            Set<Integer> voisinsI = getVoisins(i);
-            voisinsI.remove(j);
-            Set<Integer> voisinsJ = getVoisins(j);
-            voisinsJ.remove(i);
-
-            /* a finir*/
+        if(mapAretes.containsKey(i) && mapAretes.containsKey(j)){
+            HashSet<Arete> collectionAreteVoisines= new HashSet<>();
+            int nouveauSommet = Math.min(i,j);
+            for (Arete a : mapAretes.get(i)) {
+                if(a.i()== j || a.j()==j){
+                    supprimerArete(a);
+                }else{
+                    if(a.i()==i){
+                        collectionAreteVoisines.add(new Arete(nouveauSommet,a.j(),a.route()));
+                    } else if (a.j()==i) {
+                        collectionAreteVoisines.add(new Arete(a.i(),nouveauSommet,a.route()));
+                    }
+                }
+            }
+            for (Arete a : mapAretes.get(j)) {
+                if(a.i()== i || a.j()==i){
+                    supprimerArete(a);
+                }
+                else{
+                        if (a.i() == j) {
+                            Arete a2 = new Arete(nouveauSommet, a.j(), a.route());
+                            if (!a2.contientArete(collectionAreteVoisines)) {
+                                collectionAreteVoisines.add(a2);
+                            }
+                        } else if (a.j() == j) {
+                            Arete a2 = new Arete(a.i(), nouveauSommet, a.route());
+                            if (!a2.contientArete(collectionAreteVoisines)) {
+                                collectionAreteVoisines.add(a2);
+                            }
+                        }
+                }
+            }
+            supprimerSommet(i);supprimerSommet(j);
+            for (Arete a : collectionAreteVoisines ) {
+                ajouterArete(a);
+            }
 
         }
     }
+
+
 
     /**
      * @return true si et seulement si la séquence d'entiers passée en paramètre correspond à un graphe simple valide.

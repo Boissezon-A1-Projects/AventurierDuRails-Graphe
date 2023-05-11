@@ -349,4 +349,31 @@ public class GrapheTest {
         System.out.println(graphe.toString());
 
     }
+
+
+
+    @Test
+    void fusionnerSommet1(){
+
+        System.out.println(graphe);
+        graphe.fusionnerSommets(0,1);
+        System.out.println(graphe);
+    }
+
+
+    @Test
+    void equals(){
+        Arete a1 = new Arete(1,2);
+        Arete a2 = new Arete(2,1);
+        assertTrue(a1.equals(a2));
+    }
+
+    @Test
+    void contains(){
+        HashSet<Arete> aretes = new HashSet<>();
+        Arete a1 = new Arete(1,2);
+        aretes.add(a1);
+        Arete a2 = new Arete(2,1);
+        assertTrue(a1.equals(a2));
+    }
 }
