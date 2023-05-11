@@ -9,7 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -187,6 +189,45 @@ public class GrapheTest {
         Graphe graphe1 = new Graphe(aretes1);
 
         assertTrue(graphe1.estUnCycle());
+    }
+
+
+    @Test
+    void getClasseConnexiteSommet0(){
+        Set<Integer> cl0 = new HashSet<>(); cl0.add(0); cl0.add(1); cl0.add(3); cl0.add(2);
+        Set<Integer> res = graphe.getClasseConnexite(0);
+        System.out.println(cl0.toString());
+        System.out.println(res.toString());
+        assertTrue(res.containsAll(cl0) && cl0.containsAll(res));
+    }
+
+    @Test
+    void getClasseConnexiteSommet0et3(){
+
+        Set<Integer> res0 = graphe.getClasseConnexite(0);
+        Set<Integer> res3 = graphe.getClasseConnexite(3);
+        System.out.println(res0.toString());
+        System.out.println(res3.toString());
+        assertTrue(res0.containsAll(res3) && res3.containsAll(res0));
+    }
+
+    @Test
+    void getClasseConnexiteSommet8(){
+        Set<Integer> cl8 = new HashSet<>(); cl8.add(42); cl8.add(8);
+        Set<Integer> res = graphe.getClasseConnexite(8);
+        System.out.println(cl8.toString());
+        System.out.println(res.toString());
+        assertTrue(res.containsAll(cl8) && cl8.containsAll(res));
+    }
+
+    @Test
+    void getEnsembleClasseConnexite(){
+        Set<Integer> cl0 = graphe.getClasseConnexite(0);
+        Set<Integer> cl8 = graphe.getClasseConnexite(8);
+        Set<Set<Integer>> ECls = new HashSet<>(); ECls.add(cl0); ECls.add(cl8);
+        Set<Set<Integer>> res = graphe.getEnsembleClassesConnexite();
+        assertTrue(res.containsAll(ECls) && ECls.containsAll(res));
+
     }
 
 }

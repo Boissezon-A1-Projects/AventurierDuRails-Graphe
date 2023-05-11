@@ -244,12 +244,7 @@ public class Graphe {
      */
     public boolean estComplet() {
         int ordre = nbSommets();
-        for (Integer degS : sequenceSommets()) {
-            if(degS!=ordre-1){
-                return false;
-            }
-        }
-        return true;
+        return nbAretes() == ((ordre*(ordre-1))/2);
     }
 
     /**Fait par nous*/
@@ -372,11 +367,36 @@ public class Graphe {
     }
 
     public Set<Integer> getClasseConnexite(int v) {
-        throw new RuntimeException("Méthode non implémentée");
+        List<Integer> bleu = new ArrayList<>();
+        Set<Integer> rouge = new HashSet<>();
+        bleu.add(v);
+        while(!bleu.isEmpty()){
+            Integer sommetCourant = bleu.get(0);
+            rouge.add(sommetCourant);
+            Set<Integer> voisins = getVoisins(sommetCourant);
+            for (Integer sommetVoisin: voisins ) {
+                if(!bleu.contains(sommetVoisin) && !rouge.contains(sommetVoisin)){
+                    bleu.add(sommetVoisin);
+                }
+            }
+
+            bleu.remove(sommetCourant);
+
+        }
+
+        return rouge;
     }
 
     public Set<Set<Integer>> getEnsembleClassesConnexite() {
-        throw new RuntimeException("Méthode non implémentée");
+        Set<Set<Integer>>  res = new HashSet<>();
+
+        for (Integer sommet: mapAretes.keySet()) {
+            Set<Integer> clSommet = getClasseConnexite(sommet);
+            if(!res.contains(clSommet)){
+                res.add(clSommet);
+            }
+        }
+        return res;
     }
 
     /**
@@ -406,6 +426,8 @@ public class Graphe {
      * La pondération des arêtes devrait être ignorée.
      */
     public static boolean sequenceEstGraphe(List<Integer> sequence) {
+        /* utilisé 'algo de la prof + addition de la sequence*/
+
         throw new RuntimeException("Méthode non implémentée");
     }
 
