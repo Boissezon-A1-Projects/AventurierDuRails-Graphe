@@ -70,7 +70,15 @@ public class Graphe {
      *               prérequis : X inclus dans V()
      */
     public Graphe(Graphe graphe, Set<Integer> X) {
-        throw new RuntimeException("Méthode non implémentée");
+        this();
+        for (Integer sommet: X) {
+            for (Arete a : graphe.mapAretes.get(sommet)) {
+                if(X.contains(a.i()) && X.contains(a.j())){
+                    this.ajouterArete(a);
+                }
+            }
+
+        }
     }
 
     /**
@@ -362,8 +370,24 @@ public class Graphe {
     /**FAIT PAR NOUS*/
     public boolean aUnCycle(){throw new RuntimeException("Méthode non implémentée");}
 
+    public boolean estUnArbre(){
+        return getEnsembleClassesConnexite().size()==1 && nbAretes()==(nbSommets()-1);
+    }
+
     public boolean estUneForet() {
-        throw new RuntimeException("Méthode non implémentée");
+        Set<Set<Integer>> ensembleClassesConnexite = getEnsembleClassesConnexite();
+        Set<Graphe> ensembleSousGrapheInduitsClassesCOnnexes = new HashSet<>();
+
+        for (Set<Integer> classe : ensembleClassesConnexite) {
+            ensembleSousGrapheInduitsClassesCOnnexes.add(new Graphe(this,classe));
+        }
+        for (Graphe g: ensembleSousGrapheInduitsClassesCOnnexes) {
+            System.out.println(g.toString());
+            if(!g.estUnArbre()){
+                return false;
+            }
+        }
+        return true;
     }
 
     public Set<Integer> getClasseConnexite(int v) {
