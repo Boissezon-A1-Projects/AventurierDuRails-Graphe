@@ -334,4 +334,19 @@ public class GrapheTest {
     void sontAdjacents3(){
         assertFalse(graphe.sontAdjacents(8,3));
     }
+
+    @Test
+    void estIsthme(){
+        Arete a = new Arete(8,42);
+        assertTrue(graphe.estUnIsthme(a));
+    }
+
+    @Test
+    void estIsthme2(){
+        System.out.println(graphe.toString());
+        Arete a = new Arete(0,1);
+        assertFalse(graphe.estUnIsthme(a));
+        System.out.println(graphe.toString());
+
+    }
 }
