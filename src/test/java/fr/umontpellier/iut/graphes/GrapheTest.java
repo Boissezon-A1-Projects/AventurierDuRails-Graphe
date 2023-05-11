@@ -269,4 +269,55 @@ public class GrapheTest {
         assertFalse(graphe1.aUnCycle());
     }
 
+    @Test
+    void estUnArbre1(){
+        assertFalse( graphe.estUnArbre());
+    }
+
+    @Test
+    void estUnArbre2(){
+        List<Arete> aretes1 = new ArrayList<>();
+        aretes1.add(new Arete(0, 1));
+
+        aretes1.add(new Arete(1,2 ));
+        aretes1.add(new Arete(2,3 ));
+        aretes1.add(new Arete(3,4 ));
+        aretes1.add(new Arete(4, 0));
+        Graphe graphe1 = new Graphe(aretes1);
+        assertFalse( graphe1.estUnArbre());
+    }
+
+    @Test
+    void estUnArbre3(){
+        List<Arete> aretes1 = new ArrayList<>();
+        aretes1.add(new Arete(0, 1));
+
+        aretes1.add(new Arete(1,2 ));
+        aretes1.add(new Arete(2,3 ));
+        aretes1.add(new Arete(3,4 ));
+
+        Graphe graphe1 = new Graphe(aretes1);
+        assertTrue( graphe1.estUnArbre());
+    }
+
+    @Test
+    void estUneForet1(){
+        assertFalse(graphe.estUneForet());
+    }
+
+    @Test
+    void estUneForet2(){
+        List<Arete> aretes1 = new ArrayList<>();
+        aretes1.add(new Arete(0, 1));
+
+        aretes1.add(new Arete(1,2 ));
+        aretes1.add(new Arete(2,3 ));
+        aretes1.add(new Arete(3,4 ));
+        aretes1.add(new Arete(3,5));
+        aretes1.add(new Arete(6,7 ));
+        Graphe graphe1 = new Graphe(aretes1);
+        assertTrue(graphe1.estUneForet());
+
+    }
+
 }
