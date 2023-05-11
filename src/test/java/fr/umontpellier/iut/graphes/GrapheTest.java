@@ -231,55 +231,42 @@ public class GrapheTest {
     }
 
     @Test
-    void estUnArbre1(){
-        assertFalse( graphe.estUnArbre());
-    }
-
-    @Test
-    void estUnArbre2(){
+    void testEstChaine3(){
         List<Arete> aretes1 = new ArrayList<>();
         aretes1.add(new Arete(0, 1));
-
-        aretes1.add(new Arete(1,2 ));
-        aretes1.add(new Arete(2,3 ));
-        aretes1.add(new Arete(3,4 ));
-        aretes1.add(new Arete(4, 0));
+        aretes1.add(new Arete(1, 2));
+        aretes1.add(new Arete(0,2 ));
+        aretes1.add(new Arete(3,4));
         Graphe graphe1 = new Graphe(aretes1);
-        assertFalse( graphe1.estUnArbre());
+        assertFalse(graphe1.estUneChaine());
     }
 
     @Test
-    void estUnArbre3(){
+    void testAUnCycle(){
         List<Arete> aretes1 = new ArrayList<>();
         aretes1.add(new Arete(0, 1));
-
-        aretes1.add(new Arete(1,2 ));
-        aretes1.add(new Arete(2,3 ));
-        aretes1.add(new Arete(3,4 ));
+        aretes1.add(new Arete(1, 2));
+        aretes1.add(new Arete(2,3));
+        aretes1.add(new Arete(3,4));
+        aretes1.add(new Arete(4,5));
+        aretes1.add(new Arete(5,0));
 
         Graphe graphe1 = new Graphe(aretes1);
-        assertTrue( graphe1.estUnArbre());
+        assertTrue(graphe1.aUnCycle());
     }
 
     @Test
-    void estUneForet1(){
-        assertFalse(graphe.estUneForet());
-    }
-
-    @Test
-    void estUneForet2(){
+    void testAUnCycle2(){
         List<Arete> aretes1 = new ArrayList<>();
         aretes1.add(new Arete(0, 1));
+        aretes1.add(new Arete(1, 2));
+        aretes1.add(new Arete(2,3));
+        aretes1.add(new Arete(3,7));
+        aretes1.add(new Arete(4,5));
+        aretes1.add(new Arete(5,0));
 
-        aretes1.add(new Arete(1,2 ));
-        aretes1.add(new Arete(2,3 ));
-        aretes1.add(new Arete(3,4 ));
-        aretes1.add(new Arete(3,5));
-        aretes1.add(new Arete(6,7 ));
         Graphe graphe1 = new Graphe(aretes1);
-        assertTrue(graphe1.estUneForet());
-
+        assertFalse(graphe1.aUnCycle());
     }
-
 
 }

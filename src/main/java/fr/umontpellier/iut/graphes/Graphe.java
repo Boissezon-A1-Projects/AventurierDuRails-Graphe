@@ -361,14 +361,13 @@ public class Graphe {
             else{
                 return false;
             }
-
         }
-
-
     }
 
     /**FAIT PAR NOUS*/
-    public boolean aUnCycle(){throw new RuntimeException("Méthode non implémentée");}
+    public boolean aUnCycle(){
+        return nbAretes() > nbSommets() - 1;
+    }
 
     public boolean estUnArbre(){
         return getEnsembleClassesConnexite().size()==1 && nbAretes()==(nbSommets()-1);
