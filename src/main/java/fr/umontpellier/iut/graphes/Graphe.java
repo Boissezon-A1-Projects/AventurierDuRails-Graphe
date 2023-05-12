@@ -471,14 +471,12 @@ public class Graphe {
                 else{
                         if (a.i() == j) {
                             Arete a2 = new Arete(nouveauSommet, a.j(), a.route());
-                            if (!a2.contientArete(collectionAreteVoisines)) {
+
                                 collectionAreteVoisines.add(a2);
-                            }
+
                         } else if (a.j() == j) {
                             Arete a2 = new Arete(a.i(), nouveauSommet, a.route());
-                            if (!a2.contientArete(collectionAreteVoisines)) {
-                                collectionAreteVoisines.add(a2);
-                            }
+                            collectionAreteVoisines.add(a2);
                         }
                 }
             }

@@ -44,6 +44,6 @@ public record Arete(int i, int j, Route route) {
 
     @Override
     public int hashCode() {
-        return Objects.hash(i, j, route);
+        return Objects.hash(i*j, route);
     }
 }
