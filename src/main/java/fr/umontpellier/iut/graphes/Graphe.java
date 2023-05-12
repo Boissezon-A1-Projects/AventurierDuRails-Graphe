@@ -450,6 +450,8 @@ public class Graphe {
      * Si un des sommets n'est pas présent dans le graphe, alors cette fonction ne fait rien.
      */
     public void fusionnerSommets(int i, int j) {
+        /*demander si on peut fusionner deux sommet qui ne sont pas de la meme classe de connexité*/
+
         if(mapAretes.containsKey(i) && mapAretes.containsKey(j)){
             HashSet<Arete> collectionAreteVoisines= new HashSet<>();
             int nouveauSommet = Math.min(i,j);
@@ -520,6 +522,9 @@ public class Graphe {
      *
      */
     public List<Integer> algoDikstra(int depart, int arrivee, boolean pondere){
+        /*donc pondere si true : on doit prendre en compte la ponderation
+        * si false: on ne prend pas on compte les ponderation donc juste le plus rapide*/
+
         throw new RuntimeException("Méthode non implémentée");
     }
 

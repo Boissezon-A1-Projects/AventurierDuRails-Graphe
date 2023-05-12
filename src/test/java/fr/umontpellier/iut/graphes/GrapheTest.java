@@ -356,7 +356,7 @@ public class GrapheTest {
     void fusionnerSommet1(){
 
         System.out.println(graphe);
-        graphe.fusionnerSommets(0,1);
+        graphe.fusionnerSommets(0,8);
         System.out.println(graphe);
     }
 
