@@ -478,7 +478,7 @@ public class Graphe {
                             }
                         } else if (a.j() == j) {
                             Arete a2 = new Arete(a.i(), nouveauSommet, a.route());
-                            if (!collectionAreteVoisines.contains(a2)) {
+                            if (!a2.contientArete(collectionAreteVoisines)) {
                                 collectionAreteVoisines.add(a2);
                             }
                         }
@@ -509,6 +509,9 @@ public class Graphe {
      * La pondération des arêtes devrait être ignorée.
      */
     public static boolean sontIsomorphes(Graphe g1, Graphe g2) {
+        /*utiliser les bijections genre sommet a -> sommet 2 etc*/
+
+
         throw new RuntimeException("Méthode non implémentée");
     }
 
