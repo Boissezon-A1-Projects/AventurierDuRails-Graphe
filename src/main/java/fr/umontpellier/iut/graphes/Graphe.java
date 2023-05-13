@@ -501,7 +501,31 @@ public class Graphe {
     public static boolean sequenceEstGraphe(List<Integer> sequence) {
         /* utilisé 'algo de la prof + addition de la sequence*/
 
-        throw new RuntimeException("Méthode non implémentée");
+        Collections.sort(sequence,Collections.reverseOrder());
+        int compteur=0;
+        for (Integer degre: sequence) {
+            if(compteur+1>= sequence.size()) break;
+            int chiffreAenlever = degre;
+            System.out.println(sequence);
+            int i = compteur+1;
+            while(chiffreAenlever!=0 && i < sequence.size()){
+                Integer degreCourant = sequence.get(i);
+                if(degreCourant>=1 ){
+                    sequence.set(i,degreCourant-1);
+                }
+                chiffreAenlever--;
+                i++;
+            }
+            sequence.set(compteur,0);
+            compteur++;
+        }
+        System.out.println("ap boucle: " +sequence);
+        for (Integer degre:sequence ) {
+            if(degre!=0){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

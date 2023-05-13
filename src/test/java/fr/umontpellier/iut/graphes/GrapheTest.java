@@ -376,4 +376,22 @@ public class GrapheTest {
         Arete a2 = new Arete(2,1);
         assertTrue(a1.equals(a2));
     }
+
+    @Test
+    void sequenceEstGraphe1(){
+        List<Integer> s = new ArrayList<>(); s.add(1); s.add(1);s.add(2);s.add(2);s.add(3);s.add(3);
+        System.out.println(s);
+        assertTrue(Graphe.sequenceEstGraphe(s));
+
+    }
+
+    @Test
+    void sequenceEstGraphe2(){
+        List<Integer> s = new ArrayList<>(); s.add(1); s.add(1);s.add(2);s.add(2);s.add(3);
+        System.out.println(s);
+        assertFalse(Graphe.sequenceEstGraphe(s));
+
+    }
+
+
 }
