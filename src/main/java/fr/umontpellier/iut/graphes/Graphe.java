@@ -534,9 +534,21 @@ public class Graphe {
      */
     public static boolean sontIsomorphes(Graphe g1, Graphe g2) {
         /*utiliser les bijections genre sommet a -> sommet 2 etc*/
+        List<Integer> s1 = g1.sequenceSommets(); List<Integer> s2 = g2.sequenceSommets();
+        Set<Set<Integer>> ecc1 = g1.getEnsembleClassesConnexite(); Set<Set<Integer>> ecc2 = g2.getEnsembleClassesConnexite();
+
+        // Cree toutes les combinaisons possibles du graphe 1
+        ArrayList<ArrayList<Integer>> combinaisonsG1 = new ArrayList<>();
+        // Mauvaise idée en fait jsp :///
 
 
-        throw new RuntimeException("Méthode non implémentée");
+        if(!s1.equals(s2) || ecc1.size() != ecc2.size()){
+            return false;
+        }
+        else{
+
+        }
+        return false;
     }
 
     /**
