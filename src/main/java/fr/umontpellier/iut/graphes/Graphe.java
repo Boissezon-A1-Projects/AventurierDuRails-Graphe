@@ -1,5 +1,7 @@
 package fr.umontpellier.iut.graphes;
 
+import fr.umontpellier.iut.rails.Route;
+
 import java.util.*;
 
 /**
@@ -552,29 +554,49 @@ public class Graphe {
     }
 
     /**
-     * Retourne un plus court chemin entre 2 sommets suivant l'algorithme de Dijkstra.
-     * Les poids des arêtes sont les longueurs des routes correspondantes.
-     * @param depart le sommet de départ
-     * @param arrivee le sommet d'arrivée
-     * @param pondere true si les arêtes sont pondérées (pas les longueurs des routes correspondantes dans le jeu)
-     *                false si toutes les arêtes ont un poids de 1 (utile lorsque les routes associées sont complètement omises)
+     * Retourne un chemin entre 2 sommets sans répétition de sommets et sans dépasser
+     * le nombre de bateaux et wagons disponibles. Cette fonction supposera que `this` est
+     * bien un graphe issu du jeu avec des vraies routes (les objets routes ne sont pas null).
+     * Dans cette fonction la couleur des routes n'est pas à prendre en compte.
      *
+     * @param depart    le sommet de départ
+     * @param arrivee   le sommet d'arrivée
+     * @param nbBateaux le nombre de bateaux disponibles
+     * @param nbWagons  le nombre de wagons disponibles
+     * @return une liste d'entiers correspondant aux sommets du chemin, où l'élément en position 0 de la liste
+     * et le sommet de départ, et l'élément à la dernière position de la liste (taille de la liste - 1) est le somme d'arrivée.
+     * Si le chemin n'existe pas, retourne une liste vide (initialisée avec 0 éléments).
+     * Pré-requis le graphe `this` est un graphe avec des routes (les objets routes ne sont pas null).
      */
-    public List<Integer> algoDikstra(int depart, int arrivee, boolean pondere){
-        /*donc pondere si true : on doit prendre en compte la ponderation
-        * si false: on ne prend pas on compte les ponderation donc juste le plus rapide*/
-
+    public List<Integer> parcoursSansRepetition(int depart, int arrivee, int nbWagons, int nbBateaux) {
         throw new RuntimeException("Méthode non implémentée");
     }
 
     /**
-     * Retourne un plus court chemin entre 2 sommets sans répétition de sommets
-     * @param depart le sommet de départ
-     * @param arrivee le sommet d'arrivée
-     * @param pondere true si les arêtes sont pondérées (pas les longueurs des routes correspondantes dans le jeu)
-     *                false si toutes les arêtes ont un poids de 1 (utile lorsque les routes associées sont complètement omises)
+     * Retourne un chemin passant une et une seule fois par tous les sommets d'une liste donnée.
+     * Les éléments de la liste en paramètres doivent apparaître dans le même ordre dans la liste de sortie.
+     *
+     * @param listeSommets la liste de sommets à visiter sans répétition ;
+     *                     pré-requis : c'est une sous-liste de la liste retournée
+     * @return une liste d'entiers correspondant aux sommets du chemin.
+     * Si le chemin n'existe pas, retourne une liste vide.
      */
-    public List<Integer> parcoursSansRepetition(int depart, int arrivee, boolean pondere) {
+    public List<Integer> parcoursSansRepetition(List<Integer> listeSommets) {
         throw new RuntimeException("Méthode non implémentée");
     }
+
+    /**
+     * Retourne un plus petit ensemble bloquant de routes entre deux villes. Cette fonction supposera que `this` est
+     * bien un graphe issu du jeu avec des vraies routes (les objets routes ne sont pas null).
+     * Dans cette fonction la couleur des routes n'est pas à prendre en compte.
+     *
+     * @return un ensemble de route.
+     * Remarque : l'ensemble retourné doit être le plus petit en nombre de routes (et PAS en somme de leurs longueurs).
+     * Remarque : il se peut qu'il y ait plusieurs ensemble de cardinalité minimum.
+     * Un seul est à retourner (au choix).
+     */
+    public Set<Route> ensembleBloquant(int ville1, int ville2) {
+        throw new RuntimeException("Méthode non implémentée");
+    }
+
 }
