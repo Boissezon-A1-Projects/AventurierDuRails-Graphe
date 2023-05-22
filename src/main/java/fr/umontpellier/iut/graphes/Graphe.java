@@ -758,6 +758,21 @@ public class Graphe {
         }
     }
 
+    /**
+     * Retourne un plus court chemin entre 2 sommets.
+     *
+     * @param depart  le sommet de départ
+     * @param arrivee le sommet d'arrivée
+     * @param pondere true si les arêtes sont pondérées (pas les longueurs des routes correspondantes dans le jeu)
+     *                false si toutes les arêtes ont un poids de 1 (utile lorsque les routes associées sont complètement omises)
+     * @return une liste d'entiers correspondant aux sommets du chemin dans l'ordre : l'élément en position 0 de la liste
+     * est le sommet de départ, et l'élément à la dernière position de la liste (taille de la liste - 1) est le somme d'arrivée.
+     * Si le chemin n'existe pas, retourne une liste vide (initialisée avec 0 éléments).
+     */
+    public List<Integer> parcoursSansRepetition(int depart, int arrivee, boolean pondere) {
+        throw new RuntimeException("Méthode non implémentée");
+    }
+
 
 
     /**
