@@ -455,24 +455,29 @@ public class Graphe {
         /*demander si on peut fusionner deux sommet qui ne sont pas de la meme classe de connexité*/
 
         if(mapAretes.containsKey(i) && mapAretes.containsKey(j)){
-            HashSet<Arete> collectionAreteVoisines= new HashSet<>();
-            int nouveauSommet = Math.min(i,j);
-            for (Arete a : mapAretes.get(i)) {
-                if(a.i()== j || a.j()==j){
-                    supprimerArete(a);
-                }else{
-                    if(a.i()==i){
-                        collectionAreteVoisines.add(new Arete(nouveauSommet,a.j(),a.route()));
-                    } else if (a.j()==i) {
-                        collectionAreteVoisines.add(new Arete(a.i(),nouveauSommet,a.route()));
+            if(getVoisins(j).size()==1 && getVoisins(j).contains(i) && getVoisins(i).size()==1 && getVoisins(i).contains(j)){
+                supprimerSommet(i);supprimerSommet(j);
+                ajouterSommet(Math.min(i,j));
+
+            }
+            else {
+                HashSet<Arete> collectionAreteVoisines = new HashSet<>();
+                int nouveauSommet = Math.min(i, j);
+                for (Arete a : mapAretes.get(i)) {
+                    if (a.i() == j || a.j() == j) {
+                        supprimerArete(a);
+                    } else {
+                        if (a.i() == i) {
+                            collectionAreteVoisines.add(new Arete(nouveauSommet, a.j(), a.route()));
+                        } else if (a.j() == i) {
+                            collectionAreteVoisines.add(new Arete(a.i(), nouveauSommet, a.route()));
+                        }
                     }
                 }
-            }
-            for (Arete a : mapAretes.get(j)) {
-                if(a.i()== i || a.j()==i){
-                    supprimerArete(a);
-                }
-                else{
+                for (Arete a : mapAretes.get(j)) {
+                    if (a.i() == i || a.j() == i) {
+                        supprimerArete(a);
+                    } else {
                         if (a.i() == j) {
                             Arete a2 = new Arete(nouveauSommet, a.j(), a.route());
                             if (!a2.contientArete(collectionAreteVoisines)) {
@@ -484,13 +489,14 @@ public class Graphe {
                                 collectionAreteVoisines.add(a2);
                             }
                         }
+                    }
+                }
+                supprimerSommet(i);
+                supprimerSommet(j);
+                for (Arete a : collectionAreteVoisines) {
+                    ajouterArete(a);
                 }
             }
-            supprimerSommet(i);supprimerSommet(j);
-            for (Arete a : collectionAreteVoisines ) {
-                ajouterArete(a);
-            }
-
         }
     }
 
@@ -530,28 +536,229 @@ public class Graphe {
         return true;
     }
 
+
+    public static boolean sontIsoAide(Graphe g1, Graphe g2){
+        List<Integer> s1 = g1.sequenceSommets(); List<Integer> s2 = g2.sequenceSommets();
+        Set<Set<Integer>> ecc1 = g1.getEnsembleClassesConnexite(); Set<Set<Integer>> ecc2 = g2.getEnsembleClassesConnexite();
+        if(!s1.equals(s2)){
+            return false;
+        } else if (ecc1.size()!=ecc2.size()) {
+            return false;
+        } else if (g1.nbAretes()!=g2.nbAretes()){
+            return false;
+        }else {
+
+            Map<Integer, Integer> listeOccurenceDeg = new HashMap<>();
+            Map<Integer, List<Integer>> listeSommetsParDeg2 = new HashMap<>();
+            for (Integer deg : s1) {
+                if (!listeOccurenceDeg.containsKey(deg)) {
+                    listeOccurenceDeg.put(deg, Collections.frequency(s1, deg));
+                }
+            }
+            Integer somm1 = 0;
+            Integer somm2;
+            int minDeg1 = s1.get(0);
+            for (Integer so1 : g1.ensembleSommets()) {
+                if (g1.getVoisins(so1).size() == minDeg1) {
+                    somm1 = so1;
+                    break;
+                }
+            }
+            for (Integer so2 : g2.ensembleSommets()) {
+                if (!listeSommetsParDeg2.containsKey(g2.getVoisins(so2).size())) {
+                    List<Integer> s = new ArrayList<>();
+                    s.add(so2);
+                    listeSommetsParDeg2.put(g2.getVoisins(so2).size(), s);
+                } else {
+                    listeSommetsParDeg2.get(g2.getVoisins(so2).size()).add(so2);
+                }
+            }
+
+            somm2 = listeSommetsParDeg2.get(minDeg1).get(0);
+
+            ArrayList<Integer> sommetsParcourus1 = new ArrayList<>();
+            ArrayList<Integer> sommetsAParcourir1 = new ArrayList<>();
+            ArrayList<Integer> sommetsParcourus2 = new ArrayList<>();
+            ArrayList<Integer> sommetsAParcourir2 = new ArrayList<>();
+            ArrayList<Integer> sommetsNonParcourus2 = new ArrayList<>();
+            for (Integer s : g2.ensembleSommets()) {
+                if (!s.equals(somm2)) {
+                    sommetsNonParcourus2.add(s);
+                }
+            }
+
+            sommetsAParcourir1.add(somm1);
+            sommetsAParcourir2.add(somm2);
+
+            while (!sommetsAParcourir1.isEmpty()) {
+                int sommetCourantG1 = sommetsAParcourir1.get(0);
+                int nbDegCourant = listeOccurenceDeg.get(g1.getVoisins(sommetCourantG1).size());
+                int compteur = 0;
+                Set<Integer> seqVoisins1 = new HashSet<>();
+                for (Integer voisins : g1.getVoisins(sommetCourantG1)) {
+                    seqVoisins1.add(g1.getVoisins(voisins).size());
+                }
+
+
+                List<Integer> sommetMemeDeg2 = listeSommetsParDeg2.get(g1.getVoisins(sommetsAParcourir1.get(0)).size());
+                for (Integer sCour : sommetsParcourus2) {
+                    if (sommetMemeDeg2.contains(sCour)) {
+                        sommetMemeDeg2.remove((Integer) sCour);
+                    }
+                }
+                boolean fini = false;
+                if (sommetsNonParcourus2.size() == 1) {
+                    Set<Integer> seqVoisins2 = new HashSet<>();
+                    for (Integer voisin : g2.getVoisins(sommetsNonParcourus2.get(0))) {
+                        seqVoisins2.add(g2.getVoisins(voisin).size());
+                    }
+                    if (seqVoisins1.equals(seqVoisins2)) {
+                        break;
+                    } else {
+                        return false;
+                    }
+                }
+                while (!fini && sommetMemeDeg2.size() > 0) {
+                    int sommetCourantG2 = sommetMemeDeg2.get(0);
+                    if (compteur == nbDegCourant) {
+                        return false;
+                    }
+                    Set<Integer> seqVoisins2 = new HashSet<>();
+                    for (Integer voisin : g2.getVoisins(sommetCourantG2)) {
+                        seqVoisins2.add(g2.getVoisins(voisin).size());
+                    }
+                    if (!seqVoisins1.equals(seqVoisins2)) {
+                        compteur++;
+
+                        if (sommetsAParcourir2.get(0).equals((Integer) sommetCourantG2)) {
+                            sommetsAParcourir2.remove((Integer) sommetCourantG2);
+                            sommetsAParcourir2.add(sommetMemeDeg2.get(1));
+                            sommetsNonParcourus2.add(sommetCourantG2);
+                            sommetsNonParcourus2.remove((Integer) sommetMemeDeg2.get(1));
+                        }
+                        sommetMemeDeg2.remove((Integer) sommetCourantG2);
+
+                    } else {
+                        sommetsParcourus2.add(sommetCourantG2);
+                        sommetsAParcourir2.remove((Integer) sommetCourantG2);
+                        if (sommetsNonParcourus2.contains(sommetCourantG2)) {
+                            sommetsNonParcourus2.remove((Integer) sommetCourantG2);
+                        }
+                        if(!sommetsAParcourir2.containsAll(g2.getVoisins(sommetCourantG2))){
+                            sommetsAParcourir2.addAll(g2.getVoisins(sommetCourantG2));
+                        }
+                        fini = true;
+                    }
+                }
+
+
+                sommetsParcourus1.add(sommetCourantG1);
+                sommetsAParcourir1.remove(Integer.valueOf(sommetCourantG1));
+                for (Integer s : g1.getVoisins(sommetCourantG1)) {
+                    if (!sommetsParcourus1.contains(s) && !sommetsAParcourir1.contains(s)) {
+                        sommetsAParcourir1.add(s);
+                    }
+                }
+            }
+            return true;
+        }
+
+    }
+
+
+
     /**
      * @return true si et seulement si la séquence d'entiers passée en paramètre correspond à un graphe valide.
      * La pondération des arêtes devrait être ignorée.
      */
     public static boolean sontIsomorphes(Graphe g1, Graphe g2) {
-        /*utiliser les bijections genre sommet a -> sommet 2 etc*/
+
         List<Integer> s1 = g1.sequenceSommets(); List<Integer> s2 = g2.sequenceSommets();
         Set<Set<Integer>> ecc1 = g1.getEnsembleClassesConnexite(); Set<Set<Integer>> ecc2 = g2.getEnsembleClassesConnexite();
-
-        // Cree toutes les combinaisons possibles du graphe 1
-        ArrayList<ArrayList<Integer>> combinaisonsG1 = new ArrayList<>();
-        // Mauvaise idée en fait jsp :///
-
-
-        if(!s1.equals(s2) || ecc1.size() != ecc2.size()){
+        if(!s1.equals(s2)){
             return false;
-        }
-        else{
+        } else if (ecc1.size()!=ecc2.size()) {
+            return false;
+        }else{
+            if(ecc1.size()==1 && ecc2.size()==1){
+                return sontIsoAide(g1,g2);
+            }
+            else{
+                //map ordre : graphes correspondants pour les deux graphes
+                Map<Integer,List<Graphe>> listeccParOrdrecc1 = new HashMap<>();
+                for (Set<Integer> cc: ecc1) {
+                    Graphe g = new Graphe(g1, cc);
+                    if(!listeccParOrdrecc1.containsKey(cc.size())){
+                        List<Graphe> l = new ArrayList<>(); l.add(g);
+                        listeccParOrdrecc1.put(cc.size(),l);
+                    }
+                    else {
+                        listeccParOrdrecc1.get(cc.size()).add(g);
+                    }
+                }
+                Map<Integer,List<Graphe>> listeccParOrdrecc2 = new HashMap<>();
+                for (Set<Integer> cc: ecc2) {
+                    Graphe g = new Graphe(g2,cc);
+                    if(!listeccParOrdrecc2.containsKey(cc.size())){
+                        List<Graphe> l = new ArrayList<>(); l.add(g);
+                        listeccParOrdrecc2.put(cc.size(),l);
+                    }
+                    else {
+                        listeccParOrdrecc2.get(cc.size()).add(g);
+                    }
+                }
+
+                //vérification qu'il y est le meme nombre de classe de connexité par ordre
+                for (Integer ordre: listeccParOrdrecc1.keySet() ) {
+                    if(!listeccParOrdrecc2.containsKey(ordre)){
+                        return false;
+                    }else{
+                        if(listeccParOrdrecc1.get(ordre).size()!=listeccParOrdrecc2.get(ordre).size()){
+                            return false;
+                        }
+                    }
+                }
+
+                List<Graphe> ccParcourues1= new ArrayList<>();
+                List<Graphe> ccAParcourir1 = new ArrayList<>();
+                //on a joute le premier dans à parcourir
+                for (Integer s:listeccParOrdrecc1.keySet()) {
+                    ccAParcourir1.add(listeccParOrdrecc1.get(s).get(0));
+                    break;
+                }
+                for (Integer ordre: listeccParOrdrecc1.keySet()) {
+                    //pour chaque ordre, tant que les values de l'ordre sont encore là on continue
+                    while(!listeccParOrdrecc1.get(ordre).isEmpty()){
+                        // on prend le premier de graphe 1 et on cherche s'il y en a un qui correspond
+                        Graphe courant1 = listeccParOrdrecc1.get(ordre).get(0);
+                        boolean trouve = false;
+                        int compteur = listeccParOrdrecc2.get(ordre).size()-1;
+                        while(!trouve && compteur>=0){
+                            Graphe courant2 = listeccParOrdrecc2.get(ordre).get(compteur);
+                            boolean sontIso = sontIsoAide(courant1,courant2);
+                            if(sontIso){
+                                trouve =true;
+                                listeccParOrdrecc2.get(ordre).remove(courant2);
+                                listeccParOrdrecc1.get(ordre).remove(courant1);
+                            }
+                            else{
+                                compteur --;
+                            }
+                        }
+                        if(compteur<0){
+                            return false;
+                        }
+                    }
+
+
+                }
+                return true;
+            }
 
         }
-        return false;
     }
+
+
 
     /**
      * Retourne un chemin entre 2 sommets sans répétition de sommets et sans dépasser

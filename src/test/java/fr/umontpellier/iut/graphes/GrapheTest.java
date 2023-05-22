@@ -356,7 +356,7 @@ public class GrapheTest {
     void fusionnerSommet1(){
 
         System.out.println(graphe);
-        graphe.fusionnerSommets(0,8);
+        graphe.fusionnerSommets(42,8);
         System.out.println(graphe);
     }
 
@@ -394,4 +394,143 @@ public class GrapheTest {
     }
 
 
+    @Test
+    void sontIsomorphes(){
+        Arete a1 = new Arete(0,2);
+        Arete a2 = new Arete(0,1);
+        Arete a3 = new Arete(1,3);
+        Arete a4 = new Arete(3,4);
+        Arete a5 = new Arete(4,5);
+        Arete a6 = new Arete(4,2);
+        Arete a7 = new Arete(5,2);
+        HashSet<Arete> aretes = new HashSet<>(); aretes.add(a1);aretes.add(a2);aretes.add(a3);aretes.add(a4);aretes.add(a5);aretes.add(a6);aretes.add(a7);
+        Graphe g1 = new Graphe(aretes);
+
+
+        Arete a8 = new Arete(0,5);
+        Arete a9 = new Arete(0,1);
+        Arete a10 = new Arete(1,2);
+        Arete a11 = new Arete(1,5);
+        Arete a12 = new Arete(4,5);
+        Arete a13 = new Arete(3,2);
+        Arete a14 = new Arete(4,3);
+        HashSet<Arete> aretes2 = new HashSet<>(); aretes2.add(a8);aretes2.add(a9);aretes2.add(a10);aretes2.add(a11);aretes2.add(a12);aretes2.add(a13);aretes2.add(a14);
+        Graphe g2 = new Graphe(aretes2);
+        assertTrue(Graphe.sontIsomorphes(g1,g2));
+    }
+
+    @Test
+    void sontIsomorphes2(){
+        Arete a1 = new Arete(0,1);
+        Arete a2 = new Arete(0,2);
+        Arete a3 = new Arete(1,2);
+        Arete a4 = new Arete(2,3);
+        HashSet<Arete> aretes = new HashSet<>(); aretes.add(a1);aretes.add(a2);aretes.add(a3);aretes.add(a4);
+        Graphe g1 = new Graphe(aretes);
+
+
+        Arete a8 = new Arete(0,1);
+        Arete a9 = new Arete(1,2);
+        Arete a10 = new Arete(1,3);
+        Arete a11 = new Arete(2,3);
+        HashSet<Arete> aretes2 = new HashSet<>(); aretes2.add(a8);aretes2.add(a9);aretes2.add(a10);aretes2.add(a11);
+        Graphe g2 = new Graphe(aretes2);
+        assertTrue(Graphe.sontIsomorphes(g1,g2));
+    }
+
+    @Test
+    void sontIsomorphes3(){
+        Arete a1 = new Arete(0,1);
+        Arete a2 = new Arete(0,2);
+        Arete a3 = new Arete(1,2);
+        Arete a4 = new Arete(2,3);
+        HashSet<Arete> aretes = new HashSet<>(); aretes.add(a1);aretes.add(a2);aretes.add(a3);aretes.add(a4);
+        Graphe g1 = new Graphe(aretes);
+
+
+        Arete a8 = new Arete(0,1);
+        Arete a9 = new Arete(1,2);
+        Arete a10 = new Arete(1,3);
+
+        HashSet<Arete> aretes2 = new HashSet<>(); aretes2.add(a8);aretes2.add(a9);aretes2.add(a10);
+        Graphe g2 = new Graphe(aretes2);
+        assertFalse(Graphe.sontIsomorphes(g1,g2));
+    }
+
+    @Test
+    void sontIsomorphe4(){
+        Arete a1 = new Arete(0,2);
+        Arete a2 = new Arete(0,1);
+        Arete a3 = new Arete(1,2);
+        Arete a4 = new Arete(3,4);
+        Arete a5 = new Arete(5,6);
+        Arete a6 = new Arete(5,7);
+        HashSet<Arete> aretes = new HashSet<>(); aretes.add(a1);aretes.add(a2);aretes.add(a3);aretes.add(a4);aretes.add(a5);aretes.add(a6);
+        Graphe g1 = new Graphe(aretes);
+
+        Arete a8 = new Arete(0,1);
+        Arete a9 = new Arete(1,2);
+        Arete a10 = new Arete(3,4);
+        Arete a11 = new Arete(3,5);
+        Arete a12 = new Arete(4,5);
+        Arete a13 = new Arete(6,7);
+        HashSet<Arete> aretes2 = new HashSet<>(); aretes2.add(a8);aretes2.add(a9);aretes2.add(a10);aretes2.add(a11);aretes2.add(a12);aretes2.add(a13);
+        Graphe g2 = new Graphe(aretes2);
+        assertTrue(Graphe.sontIsomorphes(g1,g2));
+    }
+
+    @Test
+    void sontIsomorphes5(){
+        Arete a1 = new Arete(0,2);
+        Arete a2 = new Arete(0,1);
+        Arete a3 = new Arete(1,2);
+        Arete a4 = new Arete(3,4);
+        Arete a5 = new Arete(5,6);
+        Arete a6 = new Arete(5,7);
+        Arete a7 = new Arete(6,7);
+        HashSet<Arete> aretes = new HashSet<>(); aretes.add(a1);aretes.add(a2);aretes.add(a3);aretes.add(a4);aretes.add(a5);aretes.add(a6);aretes.add(a7);
+        Graphe g1 = new Graphe(aretes);
+
+        Arete a8 = new Arete(0,1);
+        Arete a9 = new Arete(1,2);
+        Arete a10 = new Arete(3,4);
+        Arete a11 = new Arete(3,5);
+        Arete a12 = new Arete(4,5);
+        Arete a13 = new Arete(6,7);
+        HashSet<Arete> aretes2 = new HashSet<>(); aretes2.add(a8);aretes2.add(a9);aretes2.add(a10);aretes2.add(a11);aretes2.add(a12);aretes2.add(a13);
+        Graphe g2 = new Graphe(aretes2);
+        assertFalse(Graphe.sontIsomorphes(g1,g2));
+    }
+
+    @Test
+    void sontIsomorphes6(){
+        Arete a1 = new Arete(0,3);
+        Arete a2 = new Arete(2,1);
+        Arete a3 = new Arete(3,2);
+        Arete a4 = new Arete(3,4);
+        Arete a5 = new Arete(5,6);
+        Arete a6 = new Arete(5,4);
+        Arete a7 = new Arete(8,7);
+        Arete a8 = new Arete(8,9);
+        Arete a9 = new Arete(9,10);
+        Arete a10 = new Arete(8,10);
+        HashSet<Arete> aretes = new HashSet<>(); aretes.add(a1);aretes.add(a2);aretes.add(a3);aretes.add(a4);aretes.add(a5);aretes.add(a6);aretes.add(a7); aretes.add(a8); aretes.add(a9); aretes.add(a10);
+        Graphe g1 = new Graphe(aretes);
+
+
+        Arete a11 = new Arete(1,0);
+        Arete a12 = new Arete(0,2);
+        Arete a13 = new Arete(2,5);
+        Arete a14 = new Arete(5,3);
+        Arete a15 = new Arete(5,6);
+        Arete a16 = new Arete(6,4);
+        Arete a17 = new Arete(10,7);
+        Arete a18 = new Arete(10,8);
+        Arete a19 = new Arete(7,8);
+        Arete a20 = new Arete(9,8);
+
+        HashSet<Arete> aretes2 = new HashSet<>();aretes2.add(a11);aretes2.add(a12);aretes2.add(a13);aretes2.add(a14);aretes2.add(a15);aretes2.add(a16);aretes2.add(a17);aretes2.add(a18);aretes2.add(a19);aretes2.add(a20);
+        Graphe g2 = new Graphe(aretes2);
+        assertTrue(Graphe.sontIsomorphes(g1,g2));
+    }
 }
