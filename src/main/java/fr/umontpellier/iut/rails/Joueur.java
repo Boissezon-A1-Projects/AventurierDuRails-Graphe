@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringJoiner;
 
+import fr.umontpellier.iut.graphes.Graphe;
 import fr.umontpellier.iut.rails.data.CarteTransport;
 import fr.umontpellier.iut.rails.data.Couleur;
 import fr.umontpellier.iut.rails.data.Destination;
@@ -789,7 +790,12 @@ public class Joueur {
      */
     public Collection<Route> routesPourCompleterDestination(Destination d) {
         // Cette fonction est à réécrire entièrement
-        throw new RuntimeException("Méthode non implémentée");
+        Graphe graphe = Jeu.getPlateau().getGraphe();
+        //prend la classe de connexité de la ville de départ avec les routes du joueur comme aretes
+        // afin de calculer le sommet relié au départ controlé par le joueur le plus proche de l'arrivée
+        Graphe grapheControleParJoueur = Jeu.getPlateau().getGraphe(routes);
+        List<Integer> classeConnexiteVilleDepart;
+        if(grapheControleParJoueur.getMapAretes().keySet().contains())
     }
 
     /**

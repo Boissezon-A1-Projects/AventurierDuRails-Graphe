@@ -84,6 +84,10 @@ public class Graphe {
         }
     }
 
+    public Map<Integer, HashSet<Arete>> getMapAretes() {
+        return mapAretes;
+    }
+
     /**
      * @return l'ensemble de sommets du graphe
      */

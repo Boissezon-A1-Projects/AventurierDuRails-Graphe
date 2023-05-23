@@ -11,7 +11,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class Jeu implements Runnable {
 
-    private final Plateau plateau;
+    private static Plateau plateau;
 
     /**
      * Liste des joueurs
@@ -467,6 +467,10 @@ public class Jeu implements Runnable {
             System.out.printf(">>> %s: %s [%s] <<<\n", joueurCourant.getNom(), instruction, joiner);
         }
         GameServer.setEtatJeu(new Gson().toJson(dataMap()));
+    }
+
+    public static Plateau getPlateau(){
+        return plateau;
     }
 
     @Override
