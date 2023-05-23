@@ -234,7 +234,7 @@ public class Plateau {
      * Les sommets du graphe correspondent aux identifiants des villes (qui sont des entiers).
      */
     public Graphe getGraphe() {
-        throw new RuntimeException("Méthode non implémentée");
+        return getGraphe(this.getRoutes());
     }
 
     /**
@@ -242,6 +242,14 @@ public class Plateau {
      * Les sommets du graphe correspondent aux identifiants des villes (qui sont des entiers).
      */
     public Graphe getGraphe(Collection<Route> ensembleDeRoutes) {
-        throw new RuntimeException("Méthode non implémentée");
+        List<Arete> aretes = new ArrayList<>();
+        for (Route route : ensembleDeRoutes) {
+            Arete a = new Arete(route.getVille1().getId(),route.getVille2().getId(),route);
+            if(!aretes.contains(a)){
+                aretes.add(a);
+            }
+
+        }
+        return  new Graphe(aretes);
     }
 }

@@ -697,9 +697,11 @@ public class Joueur {
         // les Destinations Itinéraire (elle n'est pas forcément la plus adaptée si on
         // veut utiliser des graphes...).
         // Elle est à réécrire en utilisant les Graphes
-        for (int i = 0; i < d.getVilles().size() - 1; i++) {
-            if (!villesSontConnectees(d.getVilles().get(i), d.getVilles().get(i + 1))) {
-                return false;
+        if(d.getVilles().size()==2) {
+            for (int i = 0; i < d.getVilles().size() - 1; i++) {
+                if (!villesSontConnectees(d.getVilles().get(i), d.getVilles().get(i + 1))) {
+                    return false;
+                }
             }
         }
         return true;
