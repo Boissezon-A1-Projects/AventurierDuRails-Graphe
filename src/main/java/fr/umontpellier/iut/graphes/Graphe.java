@@ -771,6 +771,13 @@ public class Graphe {
      * Si le chemin n'existe pas, retourne une liste vide (initialisée avec 0 éléments).
      */
     public List<Integer> parcoursSansRepetition(int depart, int arrivee, boolean pondere) {
+
+        if(depart == arrivee){
+            List<Integer> liste = new ArrayList<>();
+            liste.add(depart);
+            return liste;
+        }
+
         Map<Integer, Integer> distancesOrigine = new HashMap<>();
         Map<Integer, Integer> predecesseurs = new HashMap<>();
         List<Integer> aParcourir = new ArrayList<>();
@@ -802,7 +809,76 @@ public class Graphe {
                 Integer autreSommet = arete.getAutreSommet(sommetCourant);
                 int tailleArete = arete.route().getLongueur();
 
-                if(!dejaVisites.contains(autreSommet)){
+                if(!dejaVisites.contains(autreSommet) && !aParcourir.contains(autreSommet)){
+                    aParcourir.add(autreSommet);
+                    if(!pondere){
+                        tailleArete = 1;
+                    }
+                    int distanceTotale = distancesOrigine.get(sommetCourant) + tailleArete;
+                    if(distanceTotale < distancesOrigine.get(autreSommet)) {
+                        distancesOrigine.put(autreSommet, distanceTotale);
+                    }
+                    predecesseurs.put(autreSommet, sommetCourant);
+                }
+            }
+            dejaVisites.add(sommetCourant);
+        }
+
+        if(predecesseurs.get(arrivee) == null){
+            return new ArrayList<>();
+        }
+        List<Integer> chemin = new ArrayList<>();
+        chemin.add(arrivee);
+        while(predecesseurs.get(arrivee) != null){
+            chemin.add(0, predecesseurs.get(arrivee));
+            arrivee = predecesseurs.get(arrivee);
+        }
+        return chemin;
+    }
+
+    /* Fonction créée par Elliot qui prend en compte les sommets présents dans la liste en paramètre lors du parcours, pour ne pas se répéter
+       lorsqu'on appelle plusieurs fois la fonction d'à filée
+     */
+    public List<Integer> parcoursSansRepetition(int depart, int arrivee, boolean pondere, List<Integer> dejaVusPlusTot) {
+
+        if(depart == arrivee){
+            List<Integer> liste = new ArrayList<>();
+            liste.add(depart);
+            return liste;
+        }
+
+        Map<Integer, Integer> distancesOrigine = new HashMap<>();
+        Map<Integer, Integer> predecesseurs = new HashMap<>();
+        List<Integer> aParcourir = new ArrayList<>();
+
+        List<Integer> dejaVisites = new ArrayList<>();
+
+        int indiceMin;
+
+        for(Integer i : mapAretes.keySet()){
+            distancesOrigine.put(i,Integer.MAX_VALUE);
+            predecesseurs.put(i, null);
+        }
+        distancesOrigine.put(depart, 0);
+
+        aParcourir.add(depart);
+
+        while(!aParcourir.isEmpty()){
+
+            indiceMin = 0;
+            for(int i = 0; i < aParcourir.size(); i++){
+                if(distancesOrigine.get(i) <= distancesOrigine.get(aParcourir.get(indiceMin))){
+                    indiceMin = i;
+                }
+            }
+            Integer sommetCourant = aParcourir.remove(indiceMin);
+            HashSet<Arete> aretesIncidentes = mapAretes.get(sommetCourant);
+
+            for(Arete arete : aretesIncidentes){
+                Integer autreSommet = arete.getAutreSommet(sommetCourant);
+                int tailleArete = arete.route().getLongueur();
+
+                if(!dejaVisites.contains(autreSommet) && !dejaVusPlusTot.contains(autreSommet) && !aParcourir.contains(autreSommet)){
                     aParcourir.add(autreSommet);
                     if(!pondere){
                         tailleArete = 1;
@@ -831,6 +907,7 @@ public class Graphe {
 
 
 
+
     /**
      * Retourne un chemin entre 2 sommets sans répétition de sommets et sans dépasser
      * le nombre de bateaux et wagons disponibles. Cette fonction supposera que `this` est
@@ -847,7 +924,7 @@ public class Graphe {
      * Pré-requis le graphe `this` est un graphe avec des routes (les objets routes ne sont pas null).
      */
     public List<Integer> parcoursSansRepetition(int depart, int arrivee, int nbWagons, int nbBateaux) {
-        throw new RuntimeException("pas implémenbtééddqzd qz qzd dz zqd");
+        throw new RuntimeException("UwU baka");
     }
 
     /**
@@ -860,7 +937,38 @@ public class Graphe {
      * Si le chemin n'existe pas, retourne une liste vide.
      */
     public List<Integer> parcoursSansRepetition(List<Integer> listeSommets) {
-        throw new RuntimeException("Méthode non implémentée");
+        List<List<Integer>> listeChemins = new ArrayList<>();
+        List<Integer> listePasPossibles = new ArrayList<>();
+
+        for(Integer i : listeSommets){
+            listePasPossibles.add(i);
+        }
+        // Garde en mémoire les chemins de chaque points vers le suivant en vérifiant qu'on ne passe jamais par un endroit ou on est déjà
+        // passé dans un précédent appel de parcoursSansRepetition.
+        for(int i = 0; i < listeSommets.size()-1; i++){
+            Integer sommetCourant = listeSommets.get(i);
+            Integer sommetSuivant = listeSommets.get(i+1);
+            listePasPossibles.remove(sommetCourant); listePasPossibles.remove(sommetSuivant);
+            listeChemins.add(parcoursSansRepetition(sommetCourant,sommetSuivant, false, listePasPossibles));
+            if(listeChemins.get(i).size() == 0){
+                return new ArrayList<>();
+            }
+            listePasPossibles.add(sommetCourant); listePasPossibles.add(sommetSuivant);
+
+            listePasPossibles.addAll(listeChemins.get(i));
+        }
+
+        // Reconstruit le chemin total avec les chemins entre chaque points
+        List<Integer> cheminFinal = new ArrayList<>();
+        for(List<Integer> liste : listeChemins){
+            for(int i = 0; i < liste.size()-1; i++){
+                cheminFinal.add(liste.get(i));
+            }
+        }
+        System.out.println(listeChemins);
+        List<Integer> derniereListe = listeChemins.get(listeChemins.size()-1);
+        cheminFinal.add(derniereListe.get(derniereListe.size()-1));
+        return cheminFinal;
     }
 
     /**
