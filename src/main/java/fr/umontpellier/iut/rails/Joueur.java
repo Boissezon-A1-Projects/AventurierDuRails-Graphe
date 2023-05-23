@@ -788,7 +788,7 @@ public class Joueur {
      * La méthode renvoie une collection vide si la destination est déjà complète ou
      * s'il n'est pas possible de la compléter
      */
-    public Collection<Route> routesPourCompleterDestination(Destination d) {
+    /*public Collection<Route> routesPourCompleterDestination(Destination d) {
         // Cette fonction est à réécrire entièrement
         Graphe graphe = Jeu.getPlateau().getGraphe();
         //prend la classe de connexité de la ville de départ avec les routes du joueur comme aretes
@@ -796,7 +796,7 @@ public class Joueur {
         Graphe grapheControleParJoueur = Jeu.getPlateau().getGraphe(routes);
         List<Integer> classeConnexiteVilleDepart;
         if(grapheControleParJoueur.getMapAretes().keySet().contains())
-    }
+    }*/
 
     /**
      * Renvoie une collection contenant un plus court ensemble de routes (en nombre

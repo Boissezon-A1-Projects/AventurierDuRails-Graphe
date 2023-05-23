@@ -467,10 +467,11 @@ public class Graphe {
             }
             else {
                 HashSet<Arete> collectionAreteVoisines = new HashSet<>();
+                List<Arete> areteASupprimer = new ArrayList<>();
                 int nouveauSommet = Math.min(i, j);
                 for (Arete a : mapAretes.get(i)) {
                     if (a.i() == j || a.j() == j) {
-                        supprimerArete(a);
+                        areteASupprimer.add(a);
                     } else {
                         if (a.i() == i) {
                             collectionAreteVoisines.add(new Arete(nouveauSommet, a.j(), a.route()));
@@ -479,9 +480,13 @@ public class Graphe {
                         }
                     }
                 }
+                for (Arete a: areteASupprimer) {
+                    supprimerArete(a);
+                }
+                areteASupprimer.clear();
                 for (Arete a : mapAretes.get(j)) {
                     if (a.i() == i || a.j() == i) {
-                        supprimerArete(a);
+                        areteASupprimer.add(a);
                     } else {
                         if (a.i() == j) {
                             Arete a2 = new Arete(nouveauSommet, a.j(), a.route());
@@ -495,6 +500,9 @@ public class Graphe {
                             }
                         }
                     }
+                }
+                for (Arete a: areteASupprimer) {
+                    supprimerArete(a);
                 }
                 supprimerSommet(i);
                 supprimerSommet(j);
@@ -514,22 +522,39 @@ public class Graphe {
     public static boolean sequenceEstGraphe(List<Integer> sequence) {
         /* utilisé 'algo de la prof + addition de la sequence*/
 
+        if(sequence.isEmpty()){return false;}
+        int nbImpair=0;
+        for (Integer deg: sequence ) {
+            if(deg%2!=0){
+                nbImpair++;
+            }
+        }
+        if(nbImpair%2!=0){
+            return false;
+        }
         Collections.sort(sequence,Collections.reverseOrder());
         int compteur=0;
+
         for (Integer degre: sequence) {
             if(compteur+1>= sequence.size()) break;
             int chiffreAenlever = degre;
             System.out.println(sequence);
             int i = compteur+1;
+            int nbDegChange=0;
             while(chiffreAenlever!=0 && i < sequence.size()){
                 Integer degreCourant = sequence.get(i);
                 if(degreCourant>=1 ){
                     sequence.set(i,degreCourant-1);
+                    nbDegChange++;
                 }
                 chiffreAenlever--;
                 i++;
             }
-            sequence.set(compteur,0);
+            if(nbDegChange>0) {
+                if(nbDegChange==degre) {
+                    sequence.set(compteur, 0);
+                }
+            }
             compteur++;
         }
         System.out.println("ap boucle: " +sequence);

@@ -28,7 +28,18 @@ public record Arete(int i, int j, Route route) {
     public boolean contientArete(HashSet<Arete> aretes){
         for (Arete ar: aretes) {
             if(ar.estLaMeme(this)){
-                return true;
+                if(this.route==null && ar.route==null) {
+                    return true;
+                }
+                else{
+                    if(this.route!=null && ar.route==null){
+                        return false;
+                    } else if (this.route==null && ar.route!=null) {
+                        return false;
+                    }else if(this.route.equals(ar.route)){
+                        return true;
+                    }
+                }
             }
         }
         return false;
