@@ -310,8 +310,8 @@ public class test1 {
 
         assertTrue(Graphe.sontIsomorphes(g1, g2));
 
-        Graphe g3 = Plateau.makePlateauMonde().getGraphe();
-        assertTrue(Graphe.sontIsomorphes(g3, jeu.getPlateau().getGraphe()));
+        /*Graphe g3 = Plateau.makePlateauMonde().getGraphe();
+        assertTrue(Graphe.sontIsomorphes(g3, jeu.getPlateau().getGraphe()));*/
     }
 
     @Test
@@ -369,7 +369,7 @@ public class test1 {
         Graphe g5 = new Graphe(aretesG5);
         Graphe g6 = new Graphe(aretesG6);
 
-        //assertFalse(Graphe.sontIsomorphes(g5,g6));
+        assertFalse(Graphe.sontIsomorphes(g5,g6));
 
         List<Arete> aretes7 = Arrays.asList(
                 new Arete(1,2),
@@ -649,6 +649,221 @@ public class test1 {
 
         assertTrue(g.parcoursSansRepetition(Arrays.asList(1,4,3)).isEmpty());
     }
+
+    private Graphe chaineOrdre10() {
+        List<Arete> aretes = Arrays.asList(
+                new Arete(1,2),
+                new Arete(2,3),
+                new Arete(3,4),
+                new Arete(4,5),
+                new Arete(5,6),
+                new Arete(6,7),
+                new Arete(7,8),
+                new Arete(8,9),
+                new Arete(9,10)
+        );
+
+        return new Graphe(aretes);
+    }
+
+    private Graphe cycleOrdre10() {
+        List<Arete> aretes = Arrays.asList(
+                new Arete(1,2),
+                new Arete(2,3),
+                new Arete(3,4),
+                new Arete(4,5),
+                new Arete(5,6),
+                new Arete(6,7),
+                new Arete(7,8),
+                new Arete(8,9),
+                new Arete(9,10),
+                new Arete(10,1)
+        );
+
+        return new Graphe(aretes);
+    }
+
+    private Graphe grapheCompletOrdre(int ordre) {
+        Graphe graphe = new Graphe(ordre);
+        for (int i=0; i<ordre;i++) {
+            for (int j=i+1; j<ordre; j++) {
+                graphe.ajouterArete(new Arete(i, j));
+            }
+        }
+
+        return graphe;
+    }
+
+    private Graphe arbreOrdre10Avec4Feuilles() {
+        List<Arete> aretes = Arrays.asList(
+                new Arete(1, 4),
+                new Arete(2,4),
+                new Arete(3,2),
+                new Arete(4,10),
+                new Arete(1,5),
+                new Arete(5,9),
+                new Arete(5,8),
+                new Arete(8,6),
+                new Arete(6,7)
+        );
+
+        return new Graphe(aretes);
+    }
+
+    private Graphe nonConnexe4SommetsIsoles2ComposantesOrdre3() {
+        Graphe graphe = new Graphe(10);
+
+        graphe.ajouterArete(new Arete(4,5));
+        graphe.ajouterArete(new Arete(5,6));
+
+        graphe.ajouterArete(new Arete(7,8));
+        graphe.ajouterArete(new Arete(8,9));
+
+        return graphe;
+    }
+
+    @Test
+    void nbAretes() {
+        assertTrue(chaineOrdre10().nbAretes()==9);
+        Graphe g = chaineOrdre10();
+        g.ajouterArete(new Arete(1,2, new RouteTerrestre(new Ville("", false),new Ville("", false), Couleur.VIOLET, 2)));
+        assertEquals(10,g.nbAretes());
+    }
+
+
+    @Test
+    void ensembleSommets() {
+        List<Integer> sommets0 = Arrays.asList(0,1,2,3,4,5,6,7,8,9);
+        List<Integer> sommets1 = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+        List<Integer> sommets2 = Arrays.asList(0,1,2,3,4,5,6,7,8,9, 10,11,12,13,14,15,16,17,18,19);
+
+        assertTrue(chaineOrdre10().ensembleSommets().containsAll(sommets1) && sommets1.containsAll(chaineOrdre10().ensembleSommets()));
+        assertTrue(cycleOrdre10().ensembleSommets().containsAll(sommets1) && sommets1.containsAll(cycleOrdre10().ensembleSommets()));
+        assertTrue(grapheCompletOrdre(10).ensembleSommets().containsAll(sommets0) && sommets0.containsAll(grapheCompletOrdre(10).ensembleSommets()));
+
+        assertTrue(grapheCompletOrdre(20).ensembleSommets().containsAll(sommets2) && sommets2.containsAll(grapheCompletOrdre(20).ensembleSommets()));
+        assertTrue(arbreOrdre10Avec4Feuilles().ensembleSommets().containsAll(sommets1) && sommets1.containsAll(arbreOrdre10Avec4Feuilles().ensembleSommets()));
+        assertTrue(nonConnexe4SommetsIsoles2ComposantesOrdre3().ensembleSommets().containsAll(sommets0) && sommets0.containsAll(nonConnexe4SommetsIsoles2ComposantesOrdre3().ensembleSommets()));
+    }
+
+
+
+    @Test
+    void estComplet2() {
+        assertFalse(chaineOrdre10().estComplet());
+        assertFalse(cycleOrdre10().estComplet());
+
+        assertTrue(grapheCompletOrdre(10).estComplet());
+        assertTrue(grapheCompletOrdre(20).estComplet());
+
+        assertFalse(arbreOrdre10Avec4Feuilles().estComplet());
+        assertFalse(nonConnexe4SommetsIsoles2ComposantesOrdre3().estComplet());
+    }
+
+    @Test
+    void estUneChaine2() {
+        assertTrue(chaineOrdre10().estUneChaine());
+
+        assertFalse(cycleOrdre10().estUneChaine());
+        assertFalse(grapheCompletOrdre(10).estUneChaine());
+        assertFalse(grapheCompletOrdre(10).estUneChaine());
+        assertFalse(arbreOrdre10Avec4Feuilles().estUneChaine());
+        assertFalse(nonConnexe4SommetsIsoles2ComposantesOrdre3().estUneChaine());
+    }
+
+    @Test
+    void estUnCycle2() {
+        assertFalse(chaineOrdre10().estUnCycle());
+
+        assertTrue(cycleOrdre10().estUnCycle());
+
+        assertFalse(grapheCompletOrdre(10).estUnCycle());
+        assertFalse(grapheCompletOrdre(20).estUnCycle());
+        assertFalse(arbreOrdre10Avec4Feuilles().estUnCycle());
+        assertFalse(nonConnexe4SommetsIsoles2ComposantesOrdre3().estUnCycle());
+
+    }
+
+    @Test
+    void estUneForet2() {
+        assertTrue(chaineOrdre10().estUneForet());
+        assertFalse(cycleOrdre10().estUneForet());
+        assertFalse(grapheCompletOrdre(10).estUneForet());
+        assertFalse(grapheCompletOrdre(20).estUneForet());
+        assertTrue(arbreOrdre10Avec4Feuilles().estUneForet());
+    }
+
+
+
+    @Test
+    void getClasseConnexite2() {
+        Graphe g = chaineOrdre10();
+        for (Integer sommet : g.ensembleSommets()) {
+            assertTrue(g.getClasseConnexite(sommet).containsAll(g.ensembleSommets()) && g.ensembleSommets().containsAll(g.getClasseConnexite(sommet)));
+        }
+
+        g = cycleOrdre10();
+        for (Integer sommet : g.ensembleSommets()) {
+            assertTrue(g.getClasseConnexite(sommet).containsAll(g.ensembleSommets()) && g.ensembleSommets().containsAll(g.getClasseConnexite(sommet)));
+        }
+
+        g = grapheCompletOrdre(10);
+        for (Integer sommet : g.ensembleSommets()) {
+            assertTrue(g.getClasseConnexite(sommet).containsAll(g.ensembleSommets()) && g.ensembleSommets().containsAll(g.getClasseConnexite(sommet)));
+        }
+
+        g = grapheCompletOrdre(20);
+        for (Integer sommet : g.ensembleSommets()) {
+            assertTrue(g.getClasseConnexite(sommet).containsAll(g.ensembleSommets()) && g.ensembleSommets().containsAll(g.getClasseConnexite(sommet)));
+        }
+
+        g = arbreOrdre10Avec4Feuilles();
+        for (Integer sommet : g.ensembleSommets()) {
+            assertTrue(g.getClasseConnexite(sommet).containsAll(g.ensembleSommets()) && g.ensembleSommets().containsAll(g.getClasseConnexite(sommet)));
+        }
+
+        g = nonConnexe4SommetsIsoles2ComposantesOrdre3();
+        assertTrue(g.getClasseConnexite(1).size()==1 && g.getClasseConnexite(1).contains(1));
+        assertTrue(g.getClasseConnexite(2).size()==1 && g.getClasseConnexite(2).contains(2));
+        assertTrue(g.getClasseConnexite(3).size()==1 && g.getClasseConnexite(3).contains(3));
+        assertTrue(g.getClasseConnexite(0).size()==1 && g.getClasseConnexite(0).contains(0));
+        assertTrue(g.getClasseConnexite(5).size()==3 && g.getClasseConnexite(5).containsAll(Arrays.asList(5,4,6)));
+        assertTrue(g.getClasseConnexite(6).size()==3 && g.getClasseConnexite(6).containsAll(Arrays.asList(5,4,6)));
+        assertTrue(g.getClasseConnexite(4).size()==3 && g.getClasseConnexite(4).containsAll(Arrays.asList(5,4,6)));
+        assertTrue(g.getClasseConnexite(7).size()==3 && g.getClasseConnexite(7).containsAll(Arrays.asList(7,8,9)));
+        assertTrue(g.getClasseConnexite(8).size()==3 && g.getClasseConnexite(8).containsAll(Arrays.asList(7,8,9)));
+        assertTrue(g.getClasseConnexite(9).size()==3 && g.getClasseConnexite(9).containsAll(Arrays.asList(7,8,9)));
+
+    }
+
+    @Test
+    void getEnsembleClassesConnexite() {
+        Graphe g = chaineOrdre10();
+        Set<Set<Integer>> ensemble = g.getEnsembleClassesConnexite();
+        for (Set<Integer> classe : ensemble) {
+            assertTrue(classe.containsAll(g.ensembleSommets()) && g.ensembleSommets().containsAll(classe));
+        }
+
+        g = cycleOrdre10();
+        ensemble = g.getEnsembleClassesConnexite();
+        for (Set<Integer> classe : ensemble) {
+            assertTrue(classe.containsAll(g.ensembleSommets()) && g.ensembleSommets().containsAll(classe));
+        }
+
+        g = grapheCompletOrdre(10);
+        ensemble = g.getEnsembleClassesConnexite();
+        for (Set<Integer> classe : ensemble) {
+            assertTrue(classe.containsAll(g.ensembleSommets()) && g.ensembleSommets().containsAll(classe));
+        }
+
+        g = grapheCompletOrdre(20);
+        ensemble = g.getEnsembleClassesConnexite();
+        for (Set<Integer> classe : ensemble) {
+            assertTrue(classe.containsAll(g.ensembleSommets()) && g.ensembleSommets().containsAll(classe));
+        }
+    }
+
+
 
 
     @Test

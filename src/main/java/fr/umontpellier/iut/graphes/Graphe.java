@@ -282,7 +282,7 @@ public class Graphe {
         int nbSommetsDeg1 = 0;
         List<Integer> list = sequenceSommets();
 
-        int premierSommet1 = -1;
+        /*int premierSommet1 = -1;
         int deuxiemeSommet1 = -1;
 
         if(list.size() > 2 ){
@@ -319,6 +319,18 @@ public class Graphe {
 
             else if(!(list.get(i) == 2)){
                 return false;
+            }
+        }*/
+        if(getEnsembleClassesConnexite().size()!=1){
+            return false;
+        }else{
+            if(list.get(0)!=1 || list.get(1)!=1){
+                return false;
+            }
+            for (int i = 2; i < list.size() ; i++) {
+                if(list.get(i)!=2){
+                    return false;
+                }
             }
         }
         return true;
@@ -666,9 +678,18 @@ public class Graphe {
 
                         if (sommetsAParcourir2.get(0).equals((Integer) sommetCourantG2)) {
                             sommetsAParcourir2.remove((Integer) sommetCourantG2);
-                            sommetsAParcourir2.add(sommetMemeDeg2.get(1));
+                            if(sommetMemeDeg2.size()!=1) {
+                                sommetsAParcourir2.add(sommetMemeDeg2.get(1));
+                            }else{
+                                sommetsAParcourir2.add(sommetMemeDeg2.get(0));
+                            }
                             sommetsNonParcourus2.add(sommetCourantG2);
-                            sommetsNonParcourus2.remove((Integer) sommetMemeDeg2.get(1));
+                            if(sommetMemeDeg2.size()!=1) {
+                                sommetsNonParcourus2.remove((Integer) sommetMemeDeg2.get(1));
+                            }else{
+                                sommetsNonParcourus2.remove((Integer) sommetMemeDeg2.get(0));
+                            }
+
                         }
                         sommetMemeDeg2.remove((Integer) sommetCourantG2);
 
@@ -685,6 +706,7 @@ public class Graphe {
                     }
                 }
 
+                if(sommetMemeDeg2.size()==0){return false;}
 
                 sommetsParcourus1.add(sommetCourantG1);
                 sommetsAParcourir1.remove(Integer.valueOf(sommetCourantG1));
@@ -831,7 +853,7 @@ public class Graphe {
 
             indiceMin = 0;
             for(int i = 0; i < aParcourir.size(); i++){
-                if(distancesOrigine.get(i) <= distancesOrigine.get(aParcourir.get(indiceMin))){
+                if(distancesOrigine.get(aParcourir.get(i)) <= distancesOrigine.get(aParcourir.get(indiceMin))){
                     indiceMin = i;
                 }
             }
@@ -903,7 +925,7 @@ public class Graphe {
 
             indiceMin = 0;
             for(int i = 0; i < aParcourir.size(); i++){
-                if(distancesOrigine.get(i) <= distancesOrigine.get(aParcourir.get(indiceMin))){
+                if(distancesOrigine.get(aParcourir.get(i)) <= distancesOrigine.get(aParcourir.get(indiceMin))){
                     indiceMin = i;
                 }
             }
