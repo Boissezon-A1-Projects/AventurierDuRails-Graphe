@@ -397,6 +397,10 @@ public class Graphe {
     }
 
     public Set<Integer> getClasseConnexite(int v) {
+        if(!mapAretes.containsKey(v)){
+            return new HashSet<>();
+        }
+
         List<Integer> bleu = new ArrayList<>();
         Set<Integer> rouge = new HashSet<>();
         bleu.add(v);
@@ -959,7 +963,7 @@ public class Graphe {
      * Pré-requis le graphe `this` est un graphe avec des routes (les objets routes ne sont pas null).
      */
     public List<Integer> parcoursSansRepetition(int depart, int arrivee, int nbWagons, int nbBateaux) {
-        throw new RuntimeException("UwU baka");
+        throw new RuntimeException("Eh bah la méthode elle est pas faite voilà, on a manqué de temps :)");
     }
 
     /**

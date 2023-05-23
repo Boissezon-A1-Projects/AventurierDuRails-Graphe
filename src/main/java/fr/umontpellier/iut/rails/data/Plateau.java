@@ -252,4 +252,8 @@ public class Plateau {
         }
         return  new Graphe(aretes);
     }
+
+    public List<Ville> getVilles() {
+        return villes;
+    }
 }

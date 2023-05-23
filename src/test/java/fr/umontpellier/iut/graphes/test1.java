@@ -753,5 +753,33 @@ public class test1 {
         assertTrue(graphe1.estUnIsthme(new Arete(1,2)));
     }
 
+    @Test
+    void test_joueur_routesPourCompleterDestination_1() {
+        Joueur joueur10 = new Joueur("A", jeu, Joueur.CouleurJouer.ROUGE);
+        Destination d10 = new Destination("Mexico","Moskva",10);
+        assertTrue(0 != joueur10.routesPourCompleterDestination(d10).size()); // Destination possible
+    }
+
+    @Test
+    void test_joueur_routesPourCompleterDestination_2() {
+        Joueur joueur10 = new Joueur("A", jeu, Joueur.CouleurJouer.ROUGE);
+        Destination d10 = new Destination("Mexico","Athina",10);
+        assertTrue(0 != joueur10.routesPourCompleterDestination(d10).size()); // Destination possible
+    }
+
+    @Test
+    void test_joueur_routesPourCompleterDestination_3() {
+        Joueur joueur10 = new Joueur("A", jeu, Joueur.CouleurJouer.ROUGE);
+        Destination d10 = new Destination("Hamburg","Winnipeg",10);
+        assertTrue(0 != joueur10.routesPourCompleterDestination(d10).size()); // Destination possible
+    }
+
+    @Test
+    void test_joueur_routesPourCompleterDestination_5() {
+        Joueur joueur10 = new Joueur("A", jeu, Joueur.CouleurJouer.ROUGE);
+        Destination d = new Destination(List.of("Tokyo","Sydney","Cape Town"),10,10,10);
+
+        assertTrue(0 != joueur10.routesPourCompleterDestination(d).size()); // Destination possible
+    }
 
 }

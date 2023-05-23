@@ -9,11 +9,7 @@ import java.util.Set;
 import java.util.StringJoiner;
 
 import fr.umontpellier.iut.graphes.Graphe;
-import fr.umontpellier.iut.rails.data.CarteTransport;
-import fr.umontpellier.iut.rails.data.Couleur;
-import fr.umontpellier.iut.rails.data.Destination;
-import fr.umontpellier.iut.rails.data.TypeCarteTransport;
-import fr.umontpellier.iut.rails.data.Ville;
+import fr.umontpellier.iut.rails.data.*;
 
 public class Joueur {
     public enum CouleurJouer {
@@ -780,6 +776,34 @@ public class Joueur {
                 Map.entry("routes", routes.stream().map(Route::getNom).toList()));
     }
 
+    public Ville getVilleFromString(String s){
+        for(Ville ville : Jeu.getPlateau().getVilles()){
+            if(s.equals(ville.nom())){
+                return ville;
+            }
+        }
+        return null;
+    }
+
+    public Ville getVilleFromId(Integer id){
+        for(Ville ville : Jeu.getPlateau().getVilles()){
+            if(id.equals(ville.getId())){
+                return ville;
+            }
+        }
+        return null;
+    }
+
+    public Route routeEntreDeuxVilles(Ville v1, Ville v2){
+        for(Route route : Jeu.getPlateau().getRoutes()){
+            if((route.getVille1().equals(v1) && route.getVille2().equals(v2)) || (route.getVille2().equals(v1) && route.getVille1().equals(v2))){
+                return route;
+            }
+        }
+        return null;
+    }
+
+
     /**
      * Renvoie une collection contenant un plus court ensemble de routes (en nombre
      * total de pions utilisés) que le joueur peut capturer pour compléter la
@@ -788,15 +812,48 @@ public class Joueur {
      * La méthode renvoie une collection vide si la destination est déjà complète ou
      * s'il n'est pas possible de la compléter
      */
-    /*public Collection<Route> routesPourCompleterDestination(Destination d) {
-        // Cette fonction est à réécrire entièrement
+    public Collection<Route> routesPourCompleterDestination(Destination d) {
         Graphe graphe = Jeu.getPlateau().getGraphe();
         //prend la classe de connexité de la ville de départ avec les routes du joueur comme aretes
         // afin de calculer le sommet relié au départ controlé par le joueur le plus proche de l'arrivée
         Graphe grapheControleParJoueur = Jeu.getPlateau().getGraphe(routes);
-        List<Integer> classeConnexiteVilleDepart;
-        if(grapheControleParJoueur.getMapAretes().keySet().contains())
-    }*/
+        Set<Integer> classeConnexiteVilleDepart = new HashSet<>();
+        List<Integer> idVillesDestination = new ArrayList<>();
+        for(String stringVille : d.getVilles()){
+            idVillesDestination.add(getVilleFromString(stringVille).getId());
+        }
+
+        Integer idDepart = idVillesDestination.get(0);
+
+        classeConnexiteVilleDepart = grapheControleParJoueur.getClasseConnexite(idDepart);
+
+        Integer idArrivee = idVillesDestination.get(idVillesDestination.size()-1);
+        List<Integer> meilleurChemin;
+
+        if(idVillesDestination.size()==2) {
+            meilleurChemin = graphe.parcoursSansRepetition(idDepart, idArrivee, true);
+            // Si le joueur possède déjà une route partant de la ville de départ
+            if (classeConnexiteVilleDepart.contains(idDepart)) {
+                for (Integer i : classeConnexiteVilleDepart) {
+                    if (graphe.parcoursSansRepetition(i, idArrivee, true).size() < meilleurChemin.size()) {
+                        meilleurChemin = graphe.parcoursSansRepetition(i, idArrivee, true);
+                    }
+                }
+            }
+        }
+        else{
+            meilleurChemin = graphe.parcoursSansRepetition(idVillesDestination);
+        }
+        List<Ville> villesMeilleurChemin = new ArrayList<>();
+        for(Integer i : meilleurChemin){
+            villesMeilleurChemin.add(getVilleFromId(i));
+        }
+        List<Route> routesMeilleurChemin = new ArrayList<>();
+        for(int i = 0; i< villesMeilleurChemin.size()-1; i++){
+            routesMeilleurChemin.add(routeEntreDeuxVilles(villesMeilleurChemin.get(i), villesMeilleurChemin.get(i+1)));
+        }
+        return routesMeilleurChemin;
+    }
 
     /**
      * Renvoie une collection contenant un plus court ensemble de routes (en nombre
