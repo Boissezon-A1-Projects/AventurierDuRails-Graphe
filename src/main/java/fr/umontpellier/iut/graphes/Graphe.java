@@ -807,7 +807,10 @@ public class Graphe {
 
             for(Arete arete : aretesIncidentes){
                 Integer autreSommet = arete.getAutreSommet(sommetCourant);
-                int tailleArete = arete.route().getLongueur();
+                int tailleArete = 1;
+                if(arete.route() != null) {
+                    tailleArete = arete.route().getLongueur();
+                }
 
                 if(!dejaVisites.contains(autreSommet) && !aParcourir.contains(autreSommet)){
                     aParcourir.add(autreSommet);
@@ -876,7 +879,10 @@ public class Graphe {
 
             for(Arete arete : aretesIncidentes){
                 Integer autreSommet = arete.getAutreSommet(sommetCourant);
-                int tailleArete = arete.route().getLongueur();
+                int tailleArete = 1;
+                if(arete.route() != null) {
+                    tailleArete = arete.route().getLongueur();
+                }
 
                 if(!dejaVisites.contains(autreSommet) && !dejaVusPlusTot.contains(autreSommet) && !aParcourir.contains(autreSommet)){
                     aParcourir.add(autreSommet);
