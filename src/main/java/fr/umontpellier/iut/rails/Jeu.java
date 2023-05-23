@@ -1,6 +1,7 @@
 package fr.umontpellier.iut.rails;
 
 import com.google.gson.Gson;
+import fr.umontpellier.iut.graphes.Graphe;
 import fr.umontpellier.iut.gui.GameServer;
 import fr.umontpellier.iut.rails.data.*;
 
@@ -9,6 +10,9 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class Jeu implements Runnable {
+
+    private final Plateau plateau;
+
     /**
      * Liste des joueurs
      */
@@ -59,7 +63,7 @@ public class Jeu implements Runnable {
         log = new ArrayList<>();
 
         // création des villes et des routes
-        Plateau plateau = Plateau.makePlateauMonde();
+        plateau = Plateau.makePlateauMonde();
         portsLibres = plateau.getPorts();
         routesLibres = plateau.getRoutes();
 

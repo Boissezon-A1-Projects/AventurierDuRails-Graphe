@@ -18,7 +18,6 @@ public class Joueur {
     public enum CouleurJouer {
         JAUNE, ROUGE, BLEU, VERT, ROSE;
     }
-
     /**
      * Jeu auquel le joueur est rattaché
      */
