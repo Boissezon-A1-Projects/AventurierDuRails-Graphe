@@ -1,0 +1,58 @@
+fr.umontpellier.iut.graphes.AreteProfTest
+ ✓  test_egalite_aretes
+fr.umontpellier.iut.graphes.AreteSecretTest
+  ✗ test_coherence_equals_hashcode
+ ✓  test_egalite_aretes_secret
+fr.umontpellier.iut.graphes.GrapheProfTest
+ ✓  test_parcoursSansRepetition_simple
+ ✓  test_parcoursSansRepetition_sous_liste
+fr.umontpellier.iut.graphes.GrapheSecretBasicTest
+ ✓  testAjouterSommet
+ ✓  testNbAretes
+ ✓  testNbSommets
+ ✓  testEnsembleDeSommets
+ ✓  testDegre
+  ✗ testEstSimple
+ ✓  testGetGraphDuPlateau
+ ✓  testSupprimerSommet
+  ✗ testSequenceEstGraphe
+  ✗ testSupprimerArete
+  ✗ testAjouterArete
+ ✓  testGetVoisins
+  ✗ testExisteArete
+ ✓  testDegreMax
+ ✓  testSontAdjacents
+ ✓  testConstructeurSousGrapheInduit
+fr.umontpellier.iut.graphes.GrapheSecretBonusTest
+  ✗ testEnsembleBloquant
+  ✗ testEnsembleBloquantFacile
+fr.umontpellier.iut.graphes.GrapheSecretComplexTest
+ ✓  testParcoursSansRepetitionDepartArriveeFacile
+ ✓  testFusionnerSommet
+ ✓  testSontIsomorphesComplexe
+  ✗ testParcoursSansRepetitionDepartArriveePondere
+  ✗ testParcoursSansRepetitionWagonsBateauxRoutesDUnSeulType
+ ✓  testGetClasseConnexite
+ ✓  testParcoursSansRepetitionListeSommets
+  ✗ testSontIsomorphesFacile
+ ✓  testEstUneChaine
+ ✓  testGetEnsembleClassesConnexite
+ ✓  testEstUnCycle
+ ✓  testParcoursSansRepetitionDepartArriveePlusComplique
+ ✓  testEstUnIsthme
+  ✗ testParcoursSansRepetitionWagonsBateauxRoutesDeTypesDifferents
+  ✗ testEstUneForet
+  ✗ testEstComplet
+fr.umontpellier.iut.graphes.GrapheTest
+ ✓  testAjouterSommet
+ ✓  testNbAretes
+ ✓  testSupprimerSommet
+ ✓  testContientSommet
+ ✓  testSupprimerArete
+ ✓  testAjouterArete
+ ✓  testExisteArete
+
+32 / 46 tests réussis
+Note: 10.26 / 21
+Remarque: La note est sur 21 points (avec bonus pour le calcul de l'ensemble bloquant).
+Cette note ne correspond pas nécessairement à la note individuelle de chaque membre de l'équipe.
